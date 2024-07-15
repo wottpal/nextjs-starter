@@ -4,13 +4,14 @@
 
 ## Features
 
+- 🥟 Uses Bun
+- ⭐️ Full ESM setup
 - ⚡️ Super fast linting & formatting with [Biome](https://biomejs.dev)
   - Fallback to Prettier for yet unsupported languages
-- ⭐️ Full ESM setup
-- 🌚 Theming support with [Next Themes](https://github.com/pacocoursey/next-themes)
 - ✨ Pre-configured with GitHub Actions for CI
 - 🪝 Lints staged files with [nano-staged](https://github.com/usmanyunusov/nano-staged) & [simple-git-hooks](https://github.com/toplenboren/simple-git-hooks)
-- 💅 Shadcn/ui components pre-installed
+- 💅 [Shadcn/ui](https://ui.shadcn.com/) components pre-installed
+- 🌚 Theming support with [Next Themes](https://github.com/pacocoursey/next-themes)
 - 📊 Vercel Analytics
 - 🔒 Simple Password Protection
 - 🌎 Internationalization-ready

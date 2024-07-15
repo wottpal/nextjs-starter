@@ -7,7 +7,8 @@
 - 🥟 Uses Bun
 - ⭐️ Full ESM setup
 - ⚡️ Super fast linting & formatting with [Biome](https://biomejs.dev)
-  - Fallback to Prettier for yet unsupported languages
+  - Including Tailwind class sorting
+  - Fallback to Prettier for [unsupported languages](https://biomejs.dev/internals/language-support/)
 - ✨ Pre-configured with GitHub Actions for CI
 - 🪝 Lints staged files with [nano-staged](https://github.com/usmanyunusov/nano-staged) & [simple-git-hooks](https://github.com/toplenboren/simple-git-hooks)
 - 💅 [Shadcn/ui](https://ui.shadcn.com/) components pre-installed

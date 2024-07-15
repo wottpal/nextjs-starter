@@ -23,6 +23,15 @@
       "correctness": {
         "useExhaustiveDependencies": "off"
       },
+      "nursery": {
+        "useSortedClasses": {
+          "level": "info",
+          "fix": "safe",
+          "options": {
+            "functions": ["clsx", "cva", "tw"]
+          }
+        }
+      },
       "security": {
         "noDangerouslySetInnerHtml": "off"
       }

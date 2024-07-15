@@ -9,6 +9,7 @@
 - ⭐️ Full ESM setup
 - 🌚 Theming support with [Next Themes](https://github.com/pacocoursey/next-themes)
 - ✨ Pre-configured with GitHub Actions for CI
+- 🪝 Lints staged files with [nano-staged](https://github.com/usmanyunusov/nano-staged) & [simple-git-hooks](https://github.com/toplenboren/simple-git-hooks)
 - 💅 Shadcn/ui components pre-installed
 - 📊 Vercel Analytics
 - 🔒 Simple Password Protection
@@ -17,9 +18,9 @@
 
 ## Getting Started
 
-> **Pre-requisites:**
+> [!IMPORTANT]
 >
-> - Setup Node.js v20 (e.g. via [nvm](https://github.com/nvm-sh/nvm))
+> - Setup Node.js v20 (recommended via [nvm](https://github.com/nvm-sh/nvm))
 > - Install [Bun](https://bun.sh/)
 > - Clone this repository
 

@@ -14,12 +14,12 @@
     "typecheck": "tsc --pretty --noEmit",
     "typesync": "typesync && bun install"
   },
-  "lint-staged": {
-    "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": "biome check --write --no-errors-on-unmatched",
+  "nano-staged": {
+    "*.{js,ts,cjs,mjs,jsx,tsx,json,jsonc}": "biome check --write --no-errors-on-unmatched",
     "*.{md,mdx,html,css,sass,scss,yml,yaml}": "prettier . --write"
   },
   "simple-git-hooks": {
-    "pre-commit": "bunx lint-staged"
+    "pre-commit": "bunx nano-staged"
   },
   "engines": {
     "node": "20",
@@ -89,6 +89,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "autoprefixer": "^10.4.19",
+    "nano-staged": "^0.8.0",
     "postcss": "^8.4.39",
     "prettier": "^3.3.3",
     "tailwindcss": "^3.4.4",

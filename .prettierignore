@@ -16,7 +16,5 @@ public
 *.jsx
 *.cjs
 *.mjs
-*.d.cts
-*.d.mts
 *.json
 *.jsonc

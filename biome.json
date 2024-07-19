@@ -30,6 +30,14 @@
           "options": {
             "functions": ["clsx", "cva", "tw"]
           }
+        },
+        "noRestrictedImports": {
+          "level": "error",
+          "options": {
+            "paths": {
+              "process": "Import from '@config/environment' instead"
+            }
+          }
         }
       },
       "security": {

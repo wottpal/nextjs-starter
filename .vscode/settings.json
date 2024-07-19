@@ -1,4 +1,10 @@
 {
+  "search.exclude": {
+    "**/*.{jpg,png,svg,webm,mp4,woff,woff2}": true
+  },
+  "search.useIgnoreFiles": true,
+  "search.useGlobalIgnoreFiles": true,
+  "search.useParentIgnoreFiles": true,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.organizeImports": "always",

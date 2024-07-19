@@ -1,16 +1,17 @@
 {
   "name": "minimal-next-starter",
   "description": "A better create-next-app",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
+    "preview": "next build && next start",
     "lint": "biome check . --files-ignore-unknown=true && prettier . --check",
     "lint:fix": "biome check . --write --files-ignore-unknown=true && prettier . --write",
-    "update": "npm-check-updates --root --format group -i",
+    "update": "npm-check-updates --interactive --root --format group --install always",
     "typecheck": "tsc --pretty --noEmit",
     "typesync": "typesync && bun install"
   },
@@ -22,9 +23,9 @@
     "pre-commit": "bunx nano-staged"
   },
   "engines": {
-    "node": "20",
-    "bun": "1"
+    "node": "20"
   },
+  "packageManager": "bun@1.1.20",
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-accordion": "^1.2.0",
@@ -93,7 +94,8 @@
     "postcss": "^8.4.39",
     "prettier": "^3.3.3",
     "tailwindcss": "^3.4.4",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.3",
+    "typesync": "^0.12.2"
   },
   "trustedDependencies": ["@biomejs/biome"]
 }

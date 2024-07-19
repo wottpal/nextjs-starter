@@ -17,13 +17,15 @@ export async function generateMetadata() {
 
   return {
     title: t('title'),
-    description: t('title'),
+    description: t('description'),
     metadataBase: new URL(env.NEXT_PUBLIC_URL),
     robots: {
       follow: env.NEXT_PUBLIC_PRODUCTION_MODE && !env.SITE_PASSWORD,
       index: env.NEXT_PUBLIC_PRODUCTION_MODE && !env.SITE_PASSWORD,
     },
     openGraph: {
+      title: t('title'),
+      description: t('description'),
       type: 'website',
       locale,
       url: env.NEXT_PUBLIC_URL,

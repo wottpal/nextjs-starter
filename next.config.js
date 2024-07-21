@@ -1,3 +1,4 @@
+import { withContentCollections } from '@content-collections/next'
 import createNextIntlPlugin from 'next-intl/plugin'
 
 /** @type {import('next').NextConfig} */
@@ -11,7 +12,12 @@ let nextConfig = {
   },
 }
 
+// next-intl
 const withNextIntl = createNextIntlPlugin()
 nextConfig = withNextIntl(nextConfig)
+
+// content-collections
+// IMPORTANT: Should be the last plugin
+nextConfig = withContentCollections(nextConfig)
 
 export default nextConfig

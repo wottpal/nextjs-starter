@@ -130,3 +130,6 @@ dist
 # misc
 .DS_Store
 *.pem
+
+# content-collection
+.content-collections

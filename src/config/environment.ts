@@ -1,7 +1,7 @@
 import { createEnv } from '@t3-oss/env-nextjs'
 import { z } from 'zod'
-
 import { getUrl } from './get-url'
+import { locales } from './locales'
 
 const preprocessBoolean = z.preprocess((v: unknown) => v === 'true' || v === '1', z.boolean())
 
@@ -11,7 +11,7 @@ export const env = createEnv({
    */
   server: {
     SITE_PASSWORD: z.string().optional(),
-    SITE_LOCALE: z.string().optional(),
+    SITE_LOCALE: z.enum(locales).optional(),
   },
 
   /*

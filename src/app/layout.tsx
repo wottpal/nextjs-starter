@@ -16,7 +16,10 @@ export async function generateMetadata() {
   const t = await getTranslations('Metadata')
 
   return {
-    title: t('title'),
+    title: {
+      default: t('title'),
+      template: `%s | ${t('shortTitle')}`,
+    },
     description: t('description'),
     metadataBase: new URL(env.NEXT_PUBLIC_URL),
     robots: {
@@ -39,10 +42,20 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   const messages = await getMessages({ locale })
 
   return (
-    <html lang={locale} dir="ltr" className={cn(GeistSans.variable, GeistMono.variable)}>
+    <html
+      lang={locale}
+      dir="ltr"
+      className={cn(GeistSans.variable, GeistMono.variable)}
+      suppressHydrationWarning
+    >
       <body className="relative flex h-full min-h-screen flex-col">
         <NextIntlClientProvider messages={messages}>
-          <ThemeProvider attribute="class" disableTransitionOnChange defaultTheme="dark">
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
             <Toaster />
 
             {children}

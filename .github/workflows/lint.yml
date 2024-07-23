@@ -1,11 +1,15 @@
-name: CI
+name: Lint
 
 on:
   push:
+    branches:
+      - main
+      - develop
   pull_request:
 
 jobs:
-  quality:
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
 
     steps:
@@ -20,24 +24,30 @@ jobs:
       - name: Run Biome
         run: biome ci .
 
-  ci:
-    name: CI
+  checks:
+    name: Build & Typecheck
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20]
+        bun-version: [1.1.20]
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - uses: oven-sh/setup-bun@v1
+      - uses: oven-sh/setup-bun@v2
         name: Install bun
+        with:
+          bun-version: ${{ matrix.bun-version }}
 
       - uses: actions/cache@v4
         name: Setup bun cache
         with:
           path: ~/.bun/install/cache
-          key: ${{ runner.os }}-${{ matrix.bun }}-bun-${{ hashFiles('**/bun.lockb') }}
+          key: ${{ runner.os }}-${{ matrix.bun-version }}-bun-${{ hashFiles('**/bun.lockb') }}
           restore-keys: |
-            ${{ runner.os }}-${{ matrix.bun }}-bun-
+            ${{ runner.os }}-${{ matrix.bun-version }}-bun-
 
       - name: Install dependencies
         run: bun install

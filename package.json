@@ -1,6 +1,6 @@
 {
   "name": "minimal-next-starter",
-  "description": "A minimal and opinionated Next.js starter template.",
+  "description": "A minimal and opinionated Next.js template.",
   "version": "0.0.0",
   "private": true,
   "type": "module",

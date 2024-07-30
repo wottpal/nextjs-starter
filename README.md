@@ -1,6 +1,6 @@
 # Next.js Starter
 
-> An opinionated Next.js starter template based on [next-minimal-starter](https://github.com/ixahmedxi/next-minimal-starter)
+> An opinionated Next.js template based on [next-minimal-starter](https://github.com/ixahmedxi/next-minimal-starter)
 
 ## Features
 

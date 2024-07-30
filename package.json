@@ -1,5 +1,5 @@
 {
-  "name": "minimal-next-starter",
+  "name": "@wottpal/nextjs-starter",
   "description": "A minimal and opinionated Next.js template.",
   "version": "0.0.0",
   "private": true,

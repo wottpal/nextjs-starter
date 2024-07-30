@@ -54,9 +54,12 @@ const config = {
         },
       },
       borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+        DEFAULT: 'calc(var(--radius))',
+        md: 'calc(var(--radius))',
+        lg: 'calc(var(--radius) + 4px)',
+        xl: 'calc(var(--radius) + 8px)',
+        '2xl': 'calc(var(--radius) + 12px)',
       },
       keyframes: {
         'accordion-down': {

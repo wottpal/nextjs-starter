@@ -7,10 +7,10 @@
   "search.useParentIgnoreFiles": true,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.organizeImports": "always",
     "source.fixAll.eslint": "never",
     "quickfix.biome": "always",
-    "source.organizeImports.biome": "never"
+    "source.organizeImports": "always",
+    "source.organizeImports.biome": "always"
   },
   "biome.enabled": true,
   "eslint.enable": false,
@@ -19,6 +19,9 @@
   },
   "[markdown][mdx][html][css][scss][sass][yml][yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown][mdx]": {
+    "editor.wordWrap": "on"
   },
   "typescript.updateImportsOnFileMove.enabled": "always",
   "javascript.updateImportsOnFileMove.enabled": "always",

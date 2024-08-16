@@ -3,6 +3,8 @@
     "biomejs.biome",
     "esbenp.prettier-vscode",
     "dotenv.dotenv-vscode",
-    "bradlc.vscode-tailwindcss"
+    "bradlc.vscode-tailwindcss",
+    "yzhang.markdown-all-in-one",
+    "unifiedjs.vscode-mdx"
   ]
 }

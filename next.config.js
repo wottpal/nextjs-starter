@@ -3,6 +3,7 @@ import createNextIntlPlugin from 'next-intl/plugin'
 
 /** @type {import('next').NextConfig} */
 let nextConfig = {
+  // Biome
   reactStrictMode: true,
   eslint: {
     ignoreDuringBuilds: true,

@@ -1,32 +1,15 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
-name: Lint
+name: Checks
 
 on:
   push:
-    branches:
-      - main
-      - develop
+    branches: [main, develop]
   pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
-  lint:
-    name: Lint
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Biome
-        uses: biomejs/setup-biome@v2
-        with:
-          version: latest
-
-      - name: Run Biome
-        run: biome ci .
-
   checks:
-    name: Build & Typecheck
+    name: Lint & Build & Typecheck
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -53,10 +36,14 @@ jobs:
       - name: Install dependencies
         run: bun install
 
+      - name: Run Biome
+        run: bunx biome ci .
+
         # NOTE: `Build` requires some environment variables to be set
       - name: Build
         run: |
-          NEXT_PUBLIC_SITE_LOCALE=de \
+          NEXT_PUBLIC_PRODUCTION_MODE=true \
+          NEXT_PUBLIC_SITE_LOCALE=en \
           bun run build
 
         # NOTE: `Typecheck` needs to be run after build for content-collections to be generated

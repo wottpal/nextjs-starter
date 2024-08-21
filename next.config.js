@@ -11,6 +11,14 @@ let nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  // Dev Indicators
+  devIndicators: {
+    appIsrStatus: false,
+  },
+  // Partial Prerendering
+  experimental: {
+    ppr: true,
+  },
 }
 
 // next-intl
@@ -18,7 +26,7 @@ const withNextIntl = createNextIntlPlugin()
 nextConfig = withNextIntl(nextConfig)
 
 // content-collections
-// IMPORTANT: Should be the last plugin
+// IMPORTANT: Must be the last plugin
 nextConfig = withContentCollections(nextConfig)
 
 export default nextConfig

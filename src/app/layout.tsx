@@ -3,7 +3,7 @@ import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
 import { NextIntlClientProvider } from 'next-intl'
 import { ThemeProvider } from 'next-themes'
-import type { ReactNode } from 'react'
+import { type ReactNode, Suspense } from 'react'
 
 import { Toaster } from '@/components/ui/sonner'
 import { env } from '@/config/environment'
@@ -62,7 +62,11 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
             {children}
 
             {/* Posthog Analytics */}
-            {!!env.NEXT_PUBLIC_PRODUCTION_MODE && <PosthogPageView />}
+            {!!env.NEXT_PUBLIC_PRODUCTION_MODE && (
+              <Suspense>
+                <PosthogPageView />
+              </Suspense>
+            )}
           </ThemeProvider>
         </NextIntlClientProvider>
 

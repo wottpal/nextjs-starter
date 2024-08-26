@@ -2,7 +2,7 @@ import { allLegalPages } from 'content-collections'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 
-export default async function Home() {
+export default async function HomePage() {
   const t = await getTranslations('Metadata')
 
   return (

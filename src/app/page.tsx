@@ -1,4 +1,4 @@
-import { allLegals } from 'content-collections'
+import { allLegalPages } from 'content-collections'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 
@@ -13,10 +13,10 @@ export default async function Home() {
       </div>
 
       <footer className="prose prose-neutral dark:prose-invert prose-sm flex items-center gap-2 opacity-50">
-        {allLegals.map((legal) => {
+        {allLegalPages.map((page) => {
           return (
-            <Link key={legal.slug} href={`/legal/${legal.slug}`}>
-              {legal.title}
+            <Link key={page.slug} href={page.slug}>
+              {page.title}
             </Link>
           )
         })}

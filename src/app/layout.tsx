@@ -9,6 +9,7 @@ import { Toaster } from '@/components/ui/sonner'
 import { env } from '@/config/environment'
 import { cn } from '@/utils/cn'
 import { getLocale, getMessages, getTranslations } from 'next-intl/server'
+import PosthogPageView from './(home)/components/posthog-page-view'
 import './globals.css'
 
 export async function generateMetadata() {
@@ -59,9 +60,13 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
             <Toaster />
 
             {children}
+
+            {/* Posthog Analytics */}
+            {!!env.NEXT_PUBLIC_PRODUCTION_MODE && <PosthogPageView />}
           </ThemeProvider>
         </NextIntlClientProvider>
 
+        {/* Vercel Analytics */}
         {!!env.NEXT_PUBLIC_PRODUCTION_MODE && <Analytics />}
       </body>
     </html>

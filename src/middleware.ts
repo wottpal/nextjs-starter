@@ -1,3 +1,4 @@
+import { allPages } from 'content-collections'
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 import { env } from './config/environment'
@@ -28,6 +29,15 @@ export async function middleware(req: NextRequest) {
         return NextResponse.rewrite(url)
       }
     }
+  }
+
+  // Page Redirects
+  const redirectedPage = allPages.find((page) => {
+    if (!page.redirects?.length) return false
+    return page.redirects.some((redirect) => redirect === url.pathname)
+  })
+  if (redirectedPage) {
+    return NextResponse.redirect(new URL(redirectedPage.slug, req.url), { status: 301 })
   }
 
   return NextResponse.next()

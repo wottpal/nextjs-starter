@@ -22,7 +22,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@/public/*": ["./public/*"],
-      "content-collections": ["./.content-collections/generated"]
+      "content-collections": ["./content-collections/.content-collections/generated"]
     }
   },
   "include": ["next-env.d.ts", ".next/types/**/*.ts", "src/**/*.ts", "src/**/*.tsx", "i18n.d.ts"],

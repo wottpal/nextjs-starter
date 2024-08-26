@@ -1,19 +1,20 @@
 {
   "search.exclude": {
-    "**/*.{jpg,png,svg,webm,mp4,woff,woff2}": true
+    "**/*.{jpg,jpeg,png,svg,webm,mp4,ttf,woff,woff2}": true,
+    ".frontmatter": true
   },
   "search.useIgnoreFiles": true,
-  "search.useGlobalIgnoreFiles": true,
   "search.useParentIgnoreFiles": true,
+  "biome.enabled": true,
+  "eslint.enable": false,
+  "prettier.enable": true,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "never",
-    "quickfix.biome": "always",
-    "source.organizeImports": "always",
-    "source.organizeImports.biome": "always"
+    "quickfix.biome": "explicit",
+    "source.organizeImports": "never",
+    "source.organizeImports.biome": "explicit"
   },
-  "biome.enabled": true,
-  "eslint.enable": false,
   "[javascriptreact][typescriptreact][javascript][typescript][json][jsonc]": {
     "editor.defaultFormatter": "biomejs.biome"
   },

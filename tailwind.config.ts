@@ -1,4 +1,6 @@
 import type { Config } from 'tailwindcss'
+import defaultTheme from 'tailwindcss/defaultTheme'
+import type { PluginAPI } from 'tailwindcss/types/config'
 
 const config = {
   darkMode: ['class'],
@@ -70,12 +72,20 @@ const config = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
+      fontFamily: {
+        sans: ['var(--font-geist-sans)', ...defaultTheme.fontFamily.sans],
+        display: ['var(--font-geist-mono)', ...defaultTheme.fontFamily.mono],
+      },
     },
   },
   plugins: [
     require('tailwindcss-animate'),
     require('@tailwindcss/typography'),
     require('@tailwindcss/aspect-ratio'),
+    // Custom variants
+    ({ addVariant }: PluginAPI) => {
+      addVariant('hocus', ['&:hover', '&:focus'])
+    },
   ],
 } satisfies Config
 

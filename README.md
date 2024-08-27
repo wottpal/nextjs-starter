@@ -18,6 +18,7 @@
 - 📃 Dynamic Markdown/MDX Pages with [Content Collections](https://content-collections.vercel.app/)
 - 🌎 Internationalization-ready
 - 🔑 Environment Management with [T3 Env](https://env.t3.gg/)
+- 🐶 Posthog Analytics
 
 ## Getting Started
 

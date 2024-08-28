@@ -1,3 +1,5 @@
+import { Prose } from '@/components/layout/prose'
+import { Wrapper } from '@/components/layout/wrapper'
 import { MDX } from '@/components/mdx'
 import { notFound } from 'next/navigation'
 import { findPage } from './utils/find-page'
@@ -15,8 +17,10 @@ export default async function DefaultPage({ params }: { params: { pages: string[
   if (!page) notFound()
 
   return (
-    <div className="prose prose-neutral dark:prose-invert mx-auto mt-10 w-full">
-      <MDX code={page.body} />
-    </div>
+    <Wrapper>
+      <Prose>
+        <MDX code={page.body} />
+      </Prose>
+    </Wrapper>
   )
 }

@@ -9,7 +9,7 @@ import { Toaster } from '@/components/ui/sonner'
 import { env } from '@/config/environment'
 import { cn } from '@/utils/cn'
 import { getLocale, getMessages, getTranslations } from 'next-intl/server'
-import PosthogPageView from './(home)/components/posthog-page-view'
+import PosthogPageView from '../components/posthog/posthog-page-view'
 import './globals.css'
 
 export async function generateMetadata() {
@@ -50,25 +50,21 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       suppressHydrationWarning
     >
       <body className="relative flex h-full min-h-screen flex-col">
-        <NextIntlClientProvider messages={messages}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
-          >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <NextIntlClientProvider messages={messages}>
             <Toaster />
 
             {children}
 
             {/* Posthog Analytics */}
-            {!!env.NEXT_PUBLIC_PRODUCTION_MODE && (
-              <Suspense>
-                <PosthogPageView />
-              </Suspense>
-            )}
-          </ThemeProvider>
-        </NextIntlClientProvider>
+            {!!env.NEXT_PUBLIC_PRODUCTION_MODE && <Suspense children={<PosthogPageView />} />}
+          </NextIntlClientProvider>
+        </ThemeProvider>
 
         {/* Vercel Analytics */}
         {!!env.NEXT_PUBLIC_PRODUCTION_MODE && <Analytics />}

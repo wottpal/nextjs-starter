@@ -7,13 +7,6 @@ const config = {
   content: ['./src/**/*.{ts,tsx}'],
   prefix: '',
   theme: {
-    container: {
-      center: true,
-      padding: '2rem',
-      screens: {
-        '2xl': '1400px',
-      },
-    },
     extend: {
       colors: {
         border: 'hsl(var(--border) / <alpha-value>)',
@@ -79,12 +72,17 @@ const config = {
     },
   },
   plugins: [
+    // Tailwind plugins
     require('tailwindcss-animate'),
     require('@tailwindcss/typography'),
     require('@tailwindcss/aspect-ratio'),
+    require('@tailwindcss/container-queries'),
+
     // Custom variants
     ({ addVariant }: PluginAPI) => {
       addVariant('hocus', ['&:hover', '&:focus'])
+      addVariant('group-hocus', [':merge(.group):hover &', ':merge(.group):focus &'])
+      addVariant('peer-hocus', [':merge(.peer):hover ~ &', ':merge(.peer):focus ~ &'])
     },
   ],
 } satisfies Config

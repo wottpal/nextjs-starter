@@ -8,34 +8,14 @@ import { type ReactNode, Suspense } from 'react'
 import { Toaster } from '@/components/ui/sonner'
 import { env } from '@/config/environment'
 import { cn } from '@/utils/cn'
-import { getLocale, getMessages, getTranslations } from 'next-intl/server'
+import { getLocale, getMessages } from 'next-intl/server'
 import PosthogPageView from '../components/posthog/posthog-page-view'
 import './globals.css'
+import { PosthogProvider } from '@/components/posthog/posthog-provider'
+import { generateHomeMetadata } from './(home)/utils/get-home-metadata'
 
 export async function generateMetadata() {
-  const locale = await getLocale()
-  const t = await getTranslations('Metadata')
-
-  return {
-    title: {
-      default: t('title'),
-      template: `%s | ${t('shortTitle')}`,
-    },
-    description: t('description'),
-    metadataBase: new URL(env.NEXT_PUBLIC_URL),
-    robots: {
-      follow: env.NEXT_PUBLIC_PRODUCTION_MODE && !env.SITE_PASSWORD,
-      index: env.NEXT_PUBLIC_PRODUCTION_MODE && !env.SITE_PASSWORD,
-    },
-    openGraph: {
-      title: t('title'),
-      description: t('description'),
-      type: 'website',
-      locale,
-      url: env.NEXT_PUBLIC_URL,
-      siteName: t('description'),
-    },
-  }
+  return await generateHomeMetadata()
 }
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
@@ -57,12 +37,14 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           disableTransitionOnChange
         >
           <NextIntlClientProvider messages={messages}>
-            <Toaster />
+            <PosthogProvider>
+              <Toaster />
 
-            {children}
+              {children}
 
-            {/* Posthog Analytics */}
-            {!!env.NEXT_PUBLIC_PRODUCTION_MODE && <Suspense children={<PosthogPageView />} />}
+              {/* Posthog Analytics */}
+              {!!env.NEXT_PUBLIC_PRODUCTION_MODE && <Suspense children={<PosthogPageView />} />}
+            </PosthogProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
 

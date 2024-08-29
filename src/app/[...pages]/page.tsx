@@ -3,12 +3,12 @@ import { Wrapper } from '@/components/layout/wrapper'
 import { MDX } from '@/components/mdx'
 import { notFound } from 'next/navigation'
 import { findPage } from './utils/find-page'
-import { getAllVisiblePages } from './utils/get-all-visible-pages'
+import { getVisiblePages } from './utils/get-visible-pages'
 
 export const revalidate = 3600 // Revalidate this page every hour
 
 export async function generateStaticParams() {
-  const allVisiblePages = await getAllVisiblePages()
+  const allVisiblePages = await getVisiblePages()
   return allVisiblePages.map((page) => ({ pages: page.slugItems }))
 }
 

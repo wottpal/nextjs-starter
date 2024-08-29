@@ -14,11 +14,13 @@
 - 💅 Pre-installed [Shadcn/ui](https://ui.shadcn.com/) components
 - 🌚 Theming support with [Next Themes](https://github.com/pacocoursey/next-themes)
 - 📊 Vercel Analytics
-- 🔒 Simple Password Protection
-- 📃 Dynamic Markdown/MDX Pages with [Content Collections](https://content-collections.vercel.app/)
-- 🌎 Internationalization-ready
-- 🔑 Environment Management with [T3 Env](https://env.t3.gg/)
 - 🐶 Posthog Analytics
+- 🔒 Simple (free) Password Protection
+- 📃 Dynamic Markdown/MDX Pages with [Content Collections](https://content-collections.vercel.app/)
+- 🌎 Multilanguage & Internationalization-ready
+- 🔑 Environment Management with [T3 Env](https://env.t3.gg/)
+- 🔍 SEO-optimized with Metadata, Dynamic Sitemap, JSON-LD, and more.
+<!-- - 📸 Dynamic Open Graph Images TODO -->
 
 ## Getting Started
 

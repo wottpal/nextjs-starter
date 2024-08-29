@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import colors from 'tailwindcss/colors'
 import defaultTheme from 'tailwindcss/defaultTheme'
 import type { PluginAPI } from 'tailwindcss/types/config'
 
@@ -9,6 +10,7 @@ const config = {
   theme: {
     extend: {
       colors: {
+        gray: colors.neutral,
         border: 'hsl(var(--border) / <alpha-value>)',
         input: 'hsl(var(--input) / <alpha-value>)',
         ring: 'hsl(var(--ring) / <alpha-value>)',

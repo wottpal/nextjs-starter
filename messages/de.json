@@ -1,8 +1,10 @@
 {
   "Metadata": {
-    "website": "nextjs-starter-templates.com",
     "title": "Next.js Starter",
     "shortTitle": "Next.js Starter",
-    "description": "A minimal and opinionated Next.js template."
+    "website": "nextjs-starter-templates.com",
+    "email": "hi@nextjs-starter-templates.com",
+    "description": "A minimal and opinionated Next.js template.",
+    "keywords": "Next.js, React, TypeScript, TailwindCSS, Shadcn, Vercel, Serverless, Sitemap, SEO, Blog, Portfolio, Starter, Template"
   }
 }

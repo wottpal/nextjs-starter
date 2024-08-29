@@ -14,7 +14,7 @@ export const getVisiblePages = async (collection?: 'blog', locale?: Locale) => {
       // Page must match locale
       page.locale === _locale &&
       // If given, filter by collection
-      (!collection || page.collection === 'blog') &&
+      (!collection || page.collection === collection) &&
       // Page filename must not start with an underscore (e.g. useful for `_home.mdx` or `_404.mdx`)
       !page._meta.fileName.startsWith('_') &&
       // Page must not be hidden

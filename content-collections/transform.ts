@@ -25,8 +25,9 @@ export const transformPage = async (
   const url = `${env.NEXT_PUBLIC_URL}${document.slug}`
   const slugItems = document.slug.split('/').slice(1)
   const unlocalizedFilePath = document._meta.filePath.split('/').slice(1).join('/')
-  const unlocalizedFilePathItems = document._meta.path.split('/').slice(1)
-  const collection = unlocalizedFilePathItems.length > 1 ? unlocalizedFilePathItems[0] : null
+  const unlocalizedPathItems = document._meta.path.split('/').slice(1)
+  const unlocalizedPath = unlocalizedPathItems.join('/')
+  const collection = unlocalizedPathItems.length > 1 ? unlocalizedPathItems[0] : null
 
   // Populate date properties with file metadata
   const fileStats = statSync(path.join(process.cwd(), 'content', document._meta.filePath))
@@ -41,7 +42,8 @@ export const transformPage = async (
     url,
     slugItems,
     filePath: unlocalizedFilePath,
-    filePathItems: unlocalizedFilePathItems,
+    path: unlocalizedPath,
+    pathItems: unlocalizedPathItems,
     collection,
     datePublished,
     dateModified,

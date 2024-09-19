@@ -10,28 +10,22 @@ on:
 jobs:
   checks:
     name: Lint & Build & Typecheck
+
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20]
-        bun-version: [1.1.26]
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - uses: oven-sh/setup-bun@v2
-        name: Install bun
+      - uses: actions/setup-node@v4
+        name: Setup node
         with:
-          bun-version: ${{ matrix.bun-version }}
+          node-version-file: package.json
 
-      - uses: actions/cache@v4
-        name: Setup bun cache
+      - uses: oven-sh/setup-bun@v2
+        name: Setup bun
         with:
-          path: ~/.bun/install/cache
-          key: ${{ runner.os }}-${{ matrix.bun-version }}-bun-${{ hashFiles('**/bun.lockb') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ matrix.bun-version }}-bun-
+          bun-version-file: package.json
 
       - name: Install dependencies
         run: bun install

@@ -65,9 +65,13 @@
 @layer base {
   * {
     @apply border-border;
-    font-synthesis: none !important;
   }
   body {
     @apply bg-background text-foreground font-sans antialiased;
+
+    font-synthesis: none !important;
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
   }
 }

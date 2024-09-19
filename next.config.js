@@ -1,4 +1,5 @@
 import { createContentCollectionPlugin } from '@content-collections/next'
+import createWithBundleAnalyzer from '@next/bundle-analyzer'
 import createNextIntlPlugin from 'next-intl/plugin'
 
 /** @type {import('next').NextConfig} */
@@ -38,6 +39,12 @@ let nextConfig = {
     ]
   },
 }
+
+// bundle-analyzer
+const withBundleAnalyzer = createWithBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+})
+nextConfig = withBundleAnalyzer(nextConfig)
 
 // next-intl
 const withNextIntl = createNextIntlPlugin()

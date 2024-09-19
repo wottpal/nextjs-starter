@@ -12,10 +12,15 @@ import { getLocale, getMessages } from 'next-intl/server'
 import PosthogPageView from '../components/posthog/posthog-page-view'
 import './globals.css'
 import { PosthogProvider } from '@/components/posthog/posthog-provider'
+import type { Viewport } from 'next'
 import { generateHomeMetadata } from './(home)/utils/get-home-metadata'
 
 export async function generateMetadata() {
   return await generateHomeMetadata()
+}
+
+export const viewport: Viewport = {
+  maximumScale: 1,
 }
 
 export default async function RootLayout({ children }: { children: ReactNode }) {

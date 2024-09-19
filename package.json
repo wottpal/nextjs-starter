@@ -15,7 +15,8 @@
     "lint:fix": "biome check . --write --files-ignore-unknown=true && prettier . --write",
     "update": "npm-check-updates --interactive --root --format group --install always -x '@types/node|@types/react|@types/react-dom'",
     "typecheck": "tsc --pretty --noEmit",
-    "typesync": "typesync && bun install"
+    "typesync": "typesync && bun install",
+    "postinstall": "next telemetry disable > /dev/null 2>&1"
   },
   "nano-staged": {
     "*.{js,ts,cjs,mjs,jsx,tsx,json,jsonc}": "biome check --write --no-errors-on-unmatched",

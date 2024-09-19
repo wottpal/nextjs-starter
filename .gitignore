@@ -84,6 +84,7 @@ web_modules/
 .next
 next-env.d.ts
 out
+cache
 
 # Nuxt.js build / generate output
 .nuxt

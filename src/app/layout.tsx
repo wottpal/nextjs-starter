@@ -3,17 +3,20 @@ import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
 import { NextIntlClientProvider } from 'next-intl'
 import { ThemeProvider } from 'next-themes'
-import { type ReactNode, Suspense } from 'react'
+import type { ReactNode } from 'react'
 
 import { Toaster } from '@/components/ui/sonner'
 import { env } from '@/config/environment'
 import { cn } from '@/utils/cn'
 import { getLocale, getMessages } from 'next-intl/server'
-import PosthogPageView from '../components/posthog/posthog-page-view'
 import './globals.css'
-import { PosthogProvider } from '@/components/posthog/posthog-provider'
 import type { Viewport } from 'next'
+import dynamic from 'next/dynamic'
 import { generateHomeMetadata } from './(home)/utils/get-home-metadata'
+
+const PosthogPageView = dynamic(() => import('../components/posthog/posthog-page-view'), {
+  ssr: false,
+})
 
 export async function generateMetadata() {
   return await generateHomeMetadata()
@@ -42,14 +45,12 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           disableTransitionOnChange
         >
           <NextIntlClientProvider messages={messages}>
-            <PosthogProvider>
-              <Toaster />
+            <Toaster />
 
-              {children}
+            {children}
 
-              {/* Posthog Analytics */}
-              {!!env.NEXT_PUBLIC_PRODUCTION_MODE && <Suspense children={<PosthogPageView />} />}
-            </PosthogProvider>
+            {/* Posthog Analytics */}
+            {!!env.NEXT_PUBLIC_PRODUCTION_MODE && <PosthogPageView />}
           </NextIntlClientProvider>
         </ThemeProvider>
 

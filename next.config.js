@@ -23,6 +23,7 @@ let nextConfig = {
   // Posthog Rewrites
   skipTrailingSlashRedirect: true,
   async rewrites() {
+    if (!process.env.NEXT_PUBLIC_PRODUCTION_MODE) return []
     return [
       {
         source: '/ingest/static/:path*',

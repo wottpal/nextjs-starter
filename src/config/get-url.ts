@@ -4,9 +4,9 @@
 export const getUrl = (withTrailingSlash?: boolean, _url?: string) => {
   let url = _url
     ? _url
-    : process?.env?.NEXT_PUBLIC_URL ??
+    : (process?.env?.NEXT_PUBLIC_URL ??
       process?.env?.NEXT_PUBLIC_VERCEL_URL ??
-      'http://localhost:3000'
+      'http://localhost:3000')
 
   // Include `https://` if not localhost
   url = url.includes('http') ? url : `https://${url}`

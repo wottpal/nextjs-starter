@@ -3,8 +3,8 @@ import dayjs from 'dayjs'
 import type { MetadataRoute } from 'next'
 import { getVisiblePages } from './[...pages]/utils/get-visible-pages'
 
-export async function generatePagesSitemap() {
-  const allVisiblePages = await getVisiblePages()
+export function generatePagesSitemap() {
+  const allVisiblePages = getVisiblePages()
 
   return allVisiblePages
     .map((page) => {
@@ -19,7 +19,7 @@ export async function generatePagesSitemap() {
     .sort((a, b) => b.priority - a.priority) as MetadataRoute.Sitemap
 }
 
-export async function generateDefaultSitemap() {
+export function generateDefaultSitemap() {
   const today = dayjs().format('YYYY-MM-DD')
 
   return [
@@ -33,9 +33,9 @@ export async function generateDefaultSitemap() {
   ] as MetadataRoute.Sitemap
 }
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const defaultSitemap = await generateDefaultSitemap()
-  const pagesSitemap = await generatePagesSitemap()
+export default function sitemap(): MetadataRoute.Sitemap {
+  const defaultSitemap = generateDefaultSitemap()
+  const pagesSitemap = generatePagesSitemap()
 
   return [...defaultSitemap, ...pagesSitemap]
 }

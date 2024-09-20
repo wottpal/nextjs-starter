@@ -39,6 +39,8 @@ export const env = createEnv({
     NEXT_PUBLIC_STAGING_MODE: preprocessBoolean,
     NEXT_PUBLIC_PRODUCTION_MODE: preprocessBoolean,
 
+    NEXT_PUBLIC_SHOW_ALL_PAGES: preprocessBoolean,
+
     NEXT_PUBLIC_POSTHOG_KEY: z.string().optional(), // Consider: `superRefine(requiredInProduction)`
   },
 
@@ -56,6 +58,8 @@ export const env = createEnv({
     NEXT_PUBLIC_PREVIEW_MODE: process.env.NEXT_PUBLIC_PREVIEW_MODE,
     NEXT_PUBLIC_STAGING_MODE: process.env.NEXT_PUBLIC_STAGING_MODE,
     NEXT_PUBLIC_PRODUCTION_MODE: process.env.NEXT_PUBLIC_PRODUCTION_MODE,
+
+    NEXT_PUBLIC_SHOW_ALL_PAGES: process.env.NEXT_PUBLIC_SHOW_ALL_PAGES,
 
     NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
   },

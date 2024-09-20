@@ -8,12 +8,12 @@ import { getVisiblePages } from './utils/get-visible-pages'
 export const revalidate = 3600 // Revalidate this page every hour
 
 export async function generateStaticParams() {
-  const allVisiblePages = await getVisiblePages()
+  const allVisiblePages = getVisiblePages()
   return allVisiblePages.map((page) => ({ pages: page.slugItems }))
 }
 
 export default async function DefaultPage({ params }: { params: { pages: string[] } }) {
-  const { page } = await findPage(params.pages)
+  const { page } = findPage(params.pages)
   if (!page) notFound()
 
   return (

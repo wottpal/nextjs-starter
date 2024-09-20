@@ -1,10 +1,11 @@
 import { proseVariants } from '@/components/layout/prose'
-import { allBlogPosts } from 'content-collections'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
+import { getVisiblePages } from '../[...pages]/utils/get-visible-pages'
 
 export default async function HomePage() {
   const t = await getTranslations('Metadata')
+  const allBlogPosts = getVisiblePages('blog')
 
   return (
     <main className="flex grow flex-col items-center justify-center gap-10">

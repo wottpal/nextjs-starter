@@ -1,7 +1,9 @@
+import manifest from '@/app/manifest'
 import { env } from '@/config/environment'
 import dayjs from 'dayjs'
 import type { Metadata } from 'next'
 import { getLocale, getTranslations } from 'next-intl/server'
+import type { Icon } from 'next/dist/lib/metadata/types/metadata-types'
 import type { OpenGraph } from 'next/dist/lib/metadata/types/opengraph-types'
 import type { ImageObject, Organization, WebSite, WithContext } from 'schema-dts'
 
@@ -9,16 +11,25 @@ export async function generateHomeMetadata() {
   const locale = await getLocale()
   const t = await getTranslations('Metadata')
 
-  // TODO Update images
+  // OG images
   const ogBannerUrl = `${env.NEXT_PUBLIC_URL}/og/banner.jpg`
   const ogLogoUrl = `${env.NEXT_PUBLIC_URL}/og/logo.jpg`
-
   const ogBanner = {
     url: ogBannerUrl,
     width: 1200,
     height: 630,
     alt: t('title'),
   } satisfies OpenGraph['images']
+
+  // Icons
+  const manifestIcons = ((await manifest()).icons || []).slice(1).map(
+    (icon) =>
+      ({
+        url: icon.src,
+        sizes: icon.sizes,
+        type: icon.type,
+      }) as Icon,
+  )
 
   return {
     title: t('title'),
@@ -54,6 +65,9 @@ export async function generateHomeMetadata() {
       // TODO
       // site: '@dennis_zoma',
       // creator: '@dennis_zoma',
+    },
+    icons: {
+      icon: manifestIcons,
     },
     other: {
       'og:logo': ogLogoUrl,

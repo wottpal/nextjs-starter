@@ -19,6 +19,7 @@ let nextConfig = {
   // Partial Prerendering
   experimental: {
     ppr: true,
+    // reactCompiler: true,
   },
   // Posthog Rewrites
   skipTrailingSlashRedirect: true,

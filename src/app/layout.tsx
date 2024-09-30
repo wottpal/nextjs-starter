@@ -3,27 +3,18 @@ import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
 import { NextIntlClientProvider } from 'next-intl'
 import { ThemeProvider } from 'next-themes'
-import type { ReactNode } from 'react'
+import { type ReactNode, Suspense } from 'react'
 
 import { Toaster } from '@/components/ui/sonner'
 import { env } from '@/config/environment'
 import { cn } from '@/utils/cn'
 import { getLocale, getMessages } from 'next-intl/server'
 import './globals.css'
-import type { Viewport } from 'next'
-import dynamic from 'next/dynamic'
+import Posthog from '@/lib/posthog'
 import { generateHomeMetadata } from './(home)/utils/get-home-metadata'
-
-const PosthogPageView = dynamic(() => import('../components/posthog/posthog-page-view'), {
-  ssr: false,
-})
 
 export async function generateMetadata() {
   return await generateHomeMetadata()
-}
-
-export const viewport: Viewport = {
-  maximumScale: 1,
 }
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
@@ -50,7 +41,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
             {children}
 
             {/* Posthog Analytics */}
-            {!!env.NEXT_PUBLIC_PRODUCTION_MODE && <PosthogPageView />}
+            {!!env.NEXT_PUBLIC_PRODUCTION_MODE && <Suspense children={<Posthog />} />}
           </NextIntlClientProvider>
         </ThemeProvider>
 

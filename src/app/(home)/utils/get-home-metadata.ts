@@ -62,7 +62,6 @@ export async function generateHomeMetadata() {
       images: [ogBanner],
       description: t('description'),
       card: 'summary_large_image',
-      // TODO
       // site: '@dennis_zoma',
       // creator: '@dennis_zoma',
     },

@@ -2,7 +2,7 @@ import { type Locale, locale as siteLocale } from '@/config/locales'
 import _ from 'lodash'
 import { getVisiblePages } from './get-visible-pages'
 
-export const findPage = (slugItems: string[], locale?: Locale, includeParents = true) => {
+export const findPage = (slugItems: string[], locale?: Locale) => {
   const _locale = locale || siteLocale
 
   // Find the page

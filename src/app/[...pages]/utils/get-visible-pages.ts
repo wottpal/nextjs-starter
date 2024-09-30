@@ -1,9 +1,9 @@
 import { env } from '@/config/environment'
 import { type Locale, locale as siteLocale } from '@/config/locales'
-import { allPages } from 'content-collections'
+import { type Page, allPages } from 'content-collections'
 import dayjs from 'dayjs'
 
-export const getVisiblePages = (collections?: 'blog', locale?: Locale) => {
+export const getVisiblePages = (collections?: Page['collection'][], locale?: Locale) => {
   const _locale = locale || siteLocale
 
   return allPages.filter(

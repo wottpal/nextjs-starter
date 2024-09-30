@@ -1,5 +1,4 @@
 import type { Config } from 'tailwindcss'
-import colors from 'tailwindcss/colors'
 import defaultTheme from 'tailwindcss/defaultTheme'
 import type { PluginAPI } from 'tailwindcss/types/config'
 
@@ -10,7 +9,20 @@ const config = {
   theme: {
     extend: {
       colors: {
-        gray: colors.neutral,
+        // HACK: Until https://github.com/oven-sh/bun/issues/6747 is fixed
+        gray: {
+          '50': '#fafafa',
+          '100': '#f5f5f5',
+          '200': '#e5e5e5',
+          '300': '#d4d4d4',
+          '400': '#a3a3a3',
+          '500': '#737373',
+          '600': '#525252',
+          '700': '#404040',
+          '800': '#262626',
+          '900': '#171717',
+          '950': '#0a0a0a',
+        },
         border: 'hsl(var(--border) / <alpha-value>)',
         input: 'hsl(var(--input) / <alpha-value>)',
         ring: 'hsl(var(--ring) / <alpha-value>)',

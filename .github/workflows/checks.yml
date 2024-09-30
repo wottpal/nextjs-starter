@@ -31,15 +31,16 @@ jobs:
         run: bun install
 
       - name: Run Biome
-        run: bunx biome ci .
+        run: bunx --bun biome ci .
 
         # NOTE: `Build` requires some environment variables to be set
       - name: Build
         run: |
           NEXT_PUBLIC_PRODUCTION_MODE=true \
           NEXT_PUBLIC_SITE_LOCALE=en \
-          bun run build
+          bun run --bun build
 
-        # NOTE: `Typecheck` needs to be run after build for content-collections to be generated
+        # NOTE: Typecheck must be run after build, as next-env.d.ts
+        #       and content-collections must be generated.
       - name: Typecheck
-        run: bun run typecheck
+        run: bun run --bun typecheck

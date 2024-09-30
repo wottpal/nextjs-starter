@@ -10,6 +10,7 @@ import remarkPresetLintRecommended from 'remark-preset-lint-recommended'
 import { env } from '../src/config/environment'
 import type { Locale } from '../src/config/locales'
 import type { baseSchema } from './schema'
+import type { PageCollection } from './types'
 
 export const transformPage = async (
   document: Schema<'frontmatter', ReturnType<typeof baseSchema>>,
@@ -27,12 +28,13 @@ export const transformPage = async (
   const unlocalizedFilePath = document._meta.filePath.split('/').slice(1).join('/')
   const unlocalizedPathItems = document._meta.path.split('/').slice(1)
   const unlocalizedPath = unlocalizedPathItems.join('/')
-  const collection = unlocalizedPathItems.length > 1 ? unlocalizedPathItems[0] : null
+  const collection =
+    unlocalizedPathItems.length > 1 ? (unlocalizedPathItems[0] as PageCollection) : null
 
   // Populate date properties with file metadata
   const fileStats = statSync(path.join(process.cwd(), 'content', document._meta.filePath))
   const datePublished = document.datePublished || dayjs(fileStats.birthtime).toISOString()
-  const dateModified = dayjs(fileStats.mtime).toISOString()
+  const dateModified = document.datePublished || datePublished
 
   // Populate page's document object
   return {

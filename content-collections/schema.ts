@@ -11,6 +11,7 @@ export const baseSchema = () => ({
 
   // Article Properties
   datePublished: z.string().date().optional(),
+  dateModified: z.string().date().optional(),
 })
 
 export const blogPostsSchema = baseSchema

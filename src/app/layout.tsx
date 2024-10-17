@@ -1,14 +1,13 @@
-import { Analytics } from '@vercel/analytics/react'
-import { GeistMono } from 'geist/font/mono'
-import { GeistSans } from 'geist/font/sans'
-import { NextIntlClientProvider } from 'next-intl'
-import { ThemeProvider } from 'next-themes'
-import { type ReactNode, Suspense } from 'react'
-
 import { Toaster } from '@/components/ui/sonner'
 import { env } from '@/config/environment'
 import { cn } from '@/utils/cn'
+import { GeistMono } from 'geist/font/mono'
+import { GeistSans } from 'geist/font/sans'
+import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages } from 'next-intl/server'
+import { NavigationGuardProvider } from 'next-navigation-guard'
+import { ThemeProvider } from 'next-themes'
+import { type ReactNode, Suspense } from 'react'
 import './globals.css'
 import Posthog from '@/lib/posthog'
 import { generateHomeMetadata } from './(home)/utils/get-home-metadata'
@@ -41,12 +40,13 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
             {children}
 
             {/* Posthog Analytics */}
-            {!!env.NEXT_PUBLIC_PRODUCTION_MODE && <Suspense children={<Posthog />} />}
+            {!!env.NEXT_PUBLIC_PRODUCTION_MODE && (
+              <NavigationGuardProvider>
+                <Suspense children={<Posthog />} />
+              </NavigationGuardProvider>
+            )}
           </NextIntlClientProvider>
         </ThemeProvider>
-
-        {/* Vercel Analytics */}
-        {!!env.NEXT_PUBLIC_PRODUCTION_MODE && <Analytics />}
       </body>
     </html>
   )

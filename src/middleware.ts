@@ -1,8 +1,8 @@
 import { allPages } from 'content-collections'
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
-import { uuidv7 } from 'uuidv7'
 import { env } from './config/environment'
+import { generateDistinctId } from './lib/posthog/utils'
 
 export const config = {
   // Exclude API & static routes from being redirected
@@ -12,10 +12,10 @@ export const config = {
 export async function middleware(req: NextRequest) {
   const url = req.nextUrl
 
-  const wrapResponse = (res: NextResponse) => {
+  const wrapResponse = async (res: NextResponse) => {
     // Posthog Distinct ID
     const distinctId = req.cookies.get('distinct_id')
-    if (!distinctId) res.cookies.set('distinct_id', uuidv7())
+    if (!distinctId) res.cookies.set('distinct_id', await generateDistinctId(req))
 
     return res
   }

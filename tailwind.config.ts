@@ -9,7 +9,6 @@ const config = {
   theme: {
     extend: {
       colors: {
-        // HACK: Until https://github.com/oven-sh/bun/issues/6747 is fixed
         gray: {
           '50': '#fafafa',
           '100': '#f5f5f5',
@@ -67,12 +66,20 @@ const config = {
       },
       keyframes: {
         'accordion-down': {
-          from: { height: '0' },
-          to: { height: 'var(--radix-accordion-content-height)' },
+          from: {
+            height: '0',
+          },
+          to: {
+            height: 'var(--radix-accordion-content-height)',
+          },
         },
         'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: '0' },
+          from: {
+            height: 'var(--radix-accordion-content-height)',
+          },
+          to: {
+            height: '0',
+          },
         },
       },
       animation: {

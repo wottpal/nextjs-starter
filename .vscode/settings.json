@@ -11,14 +11,14 @@
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "never",
-    "quickfix.biome": "explicit",
+    "source.fixAll.biome": "explicit",
     "source.organizeImports": "never",
     "source.organizeImports.biome": "explicit"
   },
-  "[javascriptreact][typescriptreact][javascript][typescript][json][jsonc]": {
+  "[javascriptreact][typescriptreact][javascript][typescript][json][jsonc][tailwindcss][css]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
-  "[markdown][mdx][html][css][scss][sass][yml][yaml]": {
+  "[markdown][mdx][html][yml][yaml][sass][scss]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[markdown][mdx]": {

@@ -18,7 +18,7 @@ let nextConfig = {
   },
   // Partial Prerendering
   experimental: {
-    ppr: true,
+    // ppr: true,
     // reactCompiler: true,
   },
   // Posthog Rewrites

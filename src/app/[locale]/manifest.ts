@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { getTranslations } from 'next-intl/server'
 
+// TODO IMPORTANT: Not working
 export default async function manifest(): Promise<MetadataRoute.Manifest> {
   const t = await getTranslations('Metadata')
 

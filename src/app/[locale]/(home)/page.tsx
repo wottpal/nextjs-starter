@@ -1,13 +1,17 @@
 import { proseVariants } from '@/components/layout/prose'
-import { getTranslations } from 'next-intl/server'
-import Link from 'next/link'
+import { Link, type Locale } from '@/i18n/routing'
+import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
 import { getVisiblePages } from '../[...pages]/utils/get-visible-pages'
 
 export const revalidate = 7200 // Revalidate every 2 hours
 
-export default async function HomePage() {
+export default async function HomePage({ params }: { params: Promise<{ locale: Locale }> }) {
   const t = await getTranslations('Metadata')
-  const allBlogPosts = getVisiblePages(['blog'])
+  const { locale } = await params
+  const allBlogPosts = getVisiblePages(locale, ['blog'])
+
+  // Enable static rendering
+  unstable_setRequestLocale(locale)
 
   return (
     <main className="flex grow flex-col items-center justify-center gap-10">

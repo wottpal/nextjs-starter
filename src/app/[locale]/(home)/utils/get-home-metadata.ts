@@ -1,14 +1,15 @@
-import manifest from '@/app/manifest'
 import { env } from '@/config/environment'
+import type { Locale } from '@/i18n/routing'
 import dayjs from 'dayjs'
 import type { Metadata } from 'next'
 import { getLocale, getTranslations } from 'next-intl/server'
 import type { Icon } from 'next/dist/lib/metadata/types/metadata-types'
 import type { OpenGraph } from 'next/dist/lib/metadata/types/opengraph-types'
 import type { ImageObject, Organization, WebSite, WithContext } from 'schema-dts'
+import manifest from '../../manifest'
 
 export async function generateHomeMetadata() {
-  const locale = await getLocale()
+  const locale = (await getLocale()) as Locale
   const t = await getTranslations('Metadata')
 
   // OG images

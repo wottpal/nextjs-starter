@@ -1,16 +1,16 @@
-import { env } from '@/config/environment'
+import { type Locale, routing } from '@/i18n/routing'
 import dayjs from 'dayjs'
 import type { MetadataRoute } from 'next'
-import { getVisiblePages } from './[...pages]/utils/get-visible-pages'
+import { getHomePage, getVisiblePages } from './[locale]/[...pages]/utils/get-visible-pages'
 
-export function generatePagesSitemap() {
-  const allVisiblePages = getVisiblePages()
+export function generatePagesSitemap(locale: Locale) {
+  const allVisiblePages = getVisiblePages(locale)
 
   return allVisiblePages
     .map((page) => {
       return {
         url: page.url,
-        // alternates: page.alternates,
+        alternates: page.alternates,
         lastModified: dayjs(page.dateModified).format('YYYY-MM-DD'),
         changeFrequency: 'weekly',
         priority: 1 - (page.slugItems.length - 1) / 20, // Subtract 0.05 per file-depth
@@ -19,13 +19,14 @@ export function generatePagesSitemap() {
     .sort((a, b) => b.priority - a.priority) as MetadataRoute.Sitemap
 }
 
-export function generateDefaultSitemap() {
+export function generateHomePageSitemap(locale: Locale) {
   const today = dayjs().format('YYYY-MM-DD')
+  const homePage = getHomePage(locale)
 
   return [
     {
-      url: env.NEXT_PUBLIC_URL,
-      // alternates: homePage.alternates,
+      url: homePage.url,
+      alternates: homePage.alternates,
       lastModified: today,
       changeFrequency: 'daily',
       priority: 1,
@@ -33,9 +34,13 @@ export function generateDefaultSitemap() {
   ] as MetadataRoute.Sitemap
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const defaultSitemap = generateDefaultSitemap()
-  const pagesSitemap = generatePagesSitemap()
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const sitemaps: MetadataRoute.Sitemap = []
 
-  return [...defaultSitemap, ...pagesSitemap]
+  for (const locale of routing.locales) {
+    sitemaps.push(...generateHomePageSitemap(locale))
+    sitemaps.push(...generatePagesSitemap(locale))
+  }
+
+  return sitemaps
 }

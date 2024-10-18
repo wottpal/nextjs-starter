@@ -1,7 +1,6 @@
 import { createEnv } from '@t3-oss/env-nextjs'
 import { type RefinementCtx, z } from 'zod'
 import { getUrl } from './get-url'
-import { locales } from './locales'
 
 const preprocessBoolean = z.preprocess((v: unknown) => v === 'true' || v === '1', z.boolean())
 
@@ -32,8 +31,6 @@ export const env = createEnv({
   client: {
     NEXT_PUBLIC_URL: z.preprocess((_) => getUrl(false), z.string()),
 
-    NEXT_PUBLIC_SITE_LOCALE: z.enum(locales),
-
     NEXT_PUBLIC_DEVELOPMENT_MODE: preprocessBoolean,
     NEXT_PUBLIC_PREVIEW_MODE: preprocessBoolean,
     NEXT_PUBLIC_STAGING_MODE: preprocessBoolean,
@@ -51,8 +48,6 @@ export const env = createEnv({
     SITE_PASSWORD: process.env.SITE_PASSWORD,
 
     NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
-
-    NEXT_PUBLIC_SITE_LOCALE: process.env.NEXT_PUBLIC_SITE_LOCALE,
 
     NEXT_PUBLIC_DEVELOPMENT_MODE: process.env.NEXT_PUBLIC_DEVELOPMENT_MODE,
     NEXT_PUBLIC_PREVIEW_MODE: process.env.NEXT_PUBLIC_PREVIEW_MODE,

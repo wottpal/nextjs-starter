@@ -4,13 +4,14 @@ import { cn } from '@/utils/cn'
 import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
 import { NextIntlClientProvider } from 'next-intl'
-import { getMessages } from 'next-intl/server'
+import { getMessages, setRequestLocale } from 'next-intl/server'
 import { NavigationGuardProvider } from 'next-navigation-guard'
 import { ThemeProvider } from 'next-themes'
 import { type ReactNode, Suspense } from 'react'
 import './globals.css'
 import { type Locale, routing } from '@/i18n/routing'
 import Posthog from '@/lib/posthog'
+import { redirect } from 'next/navigation'
 import { generateHomeMetadata } from './(home)/utils/get-home-metadata'
 
 export function generateStaticParams() {
@@ -26,6 +27,9 @@ export default async function RootLayout({
   params,
 }: { children: ReactNode; params: Promise<{ locale: Locale }> }) {
   const { locale } = await params
+  if (!routing.locales.includes(locale)) redirect('/')
+  setRequestLocale(locale)
+
   const messages = await getMessages({ locale })
 
   return (

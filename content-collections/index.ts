@@ -1,5 +1,5 @@
 import { defineCollection, defineConfig } from '@content-collections/core'
-import { baseSchema, blogPostsSchema } from './schema'
+import { baseSchema } from './schema'
 import { transformPage } from './transform'
 
 const pages = defineCollection({
@@ -10,14 +10,6 @@ const pages = defineCollection({
   transform: transformPage,
 })
 
-const blogPosts = defineCollection({
-  name: 'blogPosts',
-  directory: '../content',
-  include: `**/*/blog/**/*.mdx`,
-  schema: blogPostsSchema,
-  transform: transformPage,
-})
-
 export default defineConfig({
-  collections: [pages, blogPosts],
+  collections: [pages],
 })

@@ -12,7 +12,7 @@
   "packageManager": "bun@1.1.34",
   "scripts": {
     "dev": "next dev --turbo",
-    "build": "bun run clean && next build",
+    "build": "bun run clean && next build && bun run typecheck",
     "analyze": "ANALYZE=true bun run build",
     "clean": "rm -rf .next && rm -rf ./content-collections/.content-collections",
     "start": "next start",

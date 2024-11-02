@@ -1,9 +1,11 @@
 import { createContentCollectionPlugin } from '@content-collections/next'
 import createWithBundleAnalyzer from '@next/bundle-analyzer'
+import type { NextConfig } from 'next'
 import createNextIntlPlugin from 'next-intl/plugin'
 
-/** @type {import('next').NextConfig} */
-let nextConfig = {
+let nextConfig: NextConfig = {
+  // Build Mode (`standalone` for self-hosted builds)
+  output: process.env.NEXT_OUTPUT as 'standalone' | undefined,
   // Biome
   reactStrictMode: true,
   eslint: {
@@ -13,13 +15,14 @@ let nextConfig = {
     ignoreBuildErrors: true,
   },
   // Dev Indicators
-  devIndicators: {
-    appIsrStatus: false,
-  },
+  // devIndicators: {
+  //   appIsrStatus: false,
+  // },
   // Partial Prerendering
   experimental: {
     // ppr: true,
     // reactCompiler: true,
+    // dynamicIO: true,
   },
   // Posthog Rewrites
   skipTrailingSlashRedirect: true,

@@ -1,15 +1,16 @@
-import createMiddleware from 'next-intl/middleware'
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 import { env } from './config/environment'
 import { routing } from './i18n/routing'
 import { generateDistinctId } from './lib/posthog/utils'
 
+// IMPORTANT: Must be imported after 'next/server'
+import createMiddleware from 'next-intl/middleware'
+
 export const config = {
   matcher: [
     // Match all paths except for API routes and static files.
-    // See https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
-    '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
+    '/((?!api|_next/static|_next/image|.+\\.(?:ico|txt|xml|webmanifest|json|jpg|jpeg|png|webp|gif|svg|woff|woff2|ttf|eot)).*)',
   ],
 }
 
@@ -43,17 +44,6 @@ export async function middleware(req: NextRequest) {
       }
     }
   }
-
-  // Page Redirects
-  // const redirectedPage = allPages.find((page) => {
-  //   if (!page.redirects?.length) return false
-  //   return page.redirects.some((redirect) => redirect === url.pathname)
-  // })
-  // if (redirectedPage) {
-  //   return wrapResponse(
-  //     NextResponse.redirect(new URL(redirectedPage.slug, req.url), { status: 301 }),
-  //   )
-  // }
 
   const res = createMiddleware({ ...routing, alternateLinks: false })(req)
   return wrapResponse(res)

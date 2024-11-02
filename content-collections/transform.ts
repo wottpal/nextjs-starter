@@ -8,32 +8,40 @@ import remarkLintFinalNewline from 'remark-lint-final-newline'
 import remarkMdx from 'remark-mdx'
 import remarkPresetLintRecommended from 'remark-preset-lint-recommended'
 import { env } from '../src/config/environment'
+import { type Locale, defaultLocale, localePrefixes } from '../src/i18n/routing'
 import type { baseSchema } from './schema'
-import type { Alternates, Locale, PageCollection } from './types'
+import type { Alternates, PageCollection } from './types'
 
 type TBaseSchema = Schema<'frontmatter', ReturnType<typeof baseSchema>>
 
-// IMPORTANT: Also defined in @/i18n/routing.ts
-const DEFAULT_LOCALE = 'en'
-
 export const transformPage = async (document: TBaseSchema, context: Context<TBaseSchema>) => {
   const page = populateDocumentProperties(document)
+
+  const alternatesData = await getAlternates(page, context)
+
   const body = await compileMDX(context, document, {
     remarkPlugins: [remarkMdx, remarkPresetLintRecommended, [remarkLintFinalNewline, false]],
     rehypePlugins: [rehypeSlug],
   })
 
-  const { alternates, pathnames, defaultPathname } = await getAlternates(page, context)
-
-  return { ...page, body, alternates, pathnames, defaultPathname }
+  return { ...page, ...alternatesData, body }
 }
 
 function populateDocumentProperties(
   document: Schema<'frontmatter', ReturnType<typeof baseSchema>>,
 ) {
+  // Locale details
+  const intlLocale = new Intl.Locale(document._meta.filePath.split('/')[0])
+  const locale = {
+    baseName: intlLocale.baseName as Locale,
+    language: intlLocale.language,
+    region: intlLocale.region,
+    prefix: localePrefixes[intlLocale.baseName as Locale],
+  }
+
   // Page properties
-  const locale = document._meta.filePath.split('/')[0] as Locale
-  const url = `${env.NEXT_PUBLIC_URL}/${locale}${document.slug}`
+  const localizedSlug = `${locale.prefix}${document.slug}`
+  const url = `${env.NEXT_PUBLIC_URL}${localizedSlug}`
   const slugItems = document.slug.split('/').slice(1)
   const unlocalizedFilePath = document._meta.filePath.split('/').slice(1).join('/')
   const unlocalizedPathItems = document._meta.path.split('/').slice(1)
@@ -57,6 +65,7 @@ function populateDocumentProperties(
     collection,
     datePublished,
     dateModified,
+    content: undefined, // Save file size
   }
 }
 
@@ -71,13 +80,14 @@ async function getAlternates(
       return !doc.hidden && page.filePath === unlocalizedFilePath
     })
     .map(populateDocumentProperties)
-  const defaultPage = alternatePages.find((altPage) => altPage.locale === DEFAULT_LOCALE) || page
+  const defaultPage =
+    alternatePages.find((altPage) => altPage.locale.baseName === defaultLocale) || page
 
   const alternates: Alternates = {
     canonical: page.url,
     languages: alternatePages.reduce(
       (acc, altPage) => {
-        acc[altPage.locale] = altPage.url
+        acc[altPage.locale.language] = altPage.url
         return acc
       },
       { 'x-default': `${env.NEXT_PUBLIC_URL}${defaultPage.slug}` } as Alternates['languages'],
@@ -86,12 +96,13 @@ async function getAlternates(
 
   const pathnames = alternatePages.reduce(
     (acc, altPage) => {
-      acc[altPage.locale] = altPage.slug
+      acc[altPage.locale.baseName] = altPage.slug
       return acc
     },
-    { [page.locale]: page.slug } as Record<Locale, string>,
+    { [page.locale.baseName]: page.slug } as Record<Locale, string>,
   )
-  const defaultPathname = pathnames[DEFAULT_LOCALE]
+  const defaultPathname = pathnames[defaultLocale]
+  // TODO Postprocess all pathnames required for routing
 
-  return { alternates, defaultPage, alternatePages, pathnames, defaultPathname }
+  return { alternates, pathnames, defaultPathname }
 }

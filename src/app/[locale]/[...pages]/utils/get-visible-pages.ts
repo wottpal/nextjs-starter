@@ -9,7 +9,7 @@ export function getVisiblePages(locale: Locale, collections?: Page['collection']
   return allPages.filter(
     (page) =>
       // Page must match locale
-      page.locale === locale &&
+      page.locale.baseName === locale &&
       // If given, filter by collection(s)
       (!collections?.length || (page.collection && collections.includes(page.collection))) &&
       // Page must be visible
@@ -29,7 +29,7 @@ export function isPageVisible(page: Page) {
 }
 
 export function getHomePage(locale: Locale) {
-  const homePage = allPages.find((page) => page.locale === locale && page.path === 'home')
+  const homePage = allPages.find((page) => page.locale.baseName === locale && page.path === 'home')
 
   if (!homePage) {
     throw new Error(`Homepage (${locale}/home.mdx) not found.`)

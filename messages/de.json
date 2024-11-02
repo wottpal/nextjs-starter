@@ -4,7 +4,7 @@
     "shortTitle": "Next.js Starter",
     "website": "nextjs-starter-templates.com",
     "email": "hi@nextjs-starter-templates.com",
-    "description": "A minimal and opinionated Next.js template.",
+    "description": "Ein minimaler und einfacher Next.js Starter.",
     "keywords": "Next.js, React, TypeScript, TailwindCSS, Shadcn, Vercel, Serverless, Sitemap, SEO, Blog, Portfolio, Starter, Template"
   }
 }

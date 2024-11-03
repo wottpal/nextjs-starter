@@ -58,5 +58,5 @@ bun run start
 bun run update
 
 # Install shadcn/ui component
-bunx shadcn-ui@latest add <component>
+bunx shadcn@latest add <component>
 ```

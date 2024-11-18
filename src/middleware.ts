@@ -10,7 +10,7 @@ import createMiddleware from 'next-intl/middleware'
 export const config = {
   matcher: [
     // Match all paths except for API routes and static files.
-    '/((?!api|_next/static|_next/image|.+\\.(?:ico|txt|xml|webmanifest|json|jpg|jpeg|png|webp|gif|svg|woff|woff2|ttf|eot)).*)',
+    '/((?!api|ingest|_next/static|_next/image|.+\\.(?:css|js|ico|txt|xml|json|jpg|jpeg|png|webp|gif|svg|woff|woff2|ttf|eot|webmanifest)).*)',
   ],
 }
 
@@ -36,7 +36,7 @@ export async function middleware(req: NextRequest) {
 
     // If auth header is present, check if password is valid
     if (basicAuth) {
-      const authValue = basicAuth.split(' ')[1]
+      const authValue = basicAuth.split(' ')[1] || ''
       const [_, pwd] = atob(authValue).split(':')
       if (pwd !== env.SITE_PASSWORD) {
         url.pathname = '/api/auth/password/unauthorized'

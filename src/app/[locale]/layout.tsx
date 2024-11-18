@@ -14,6 +14,13 @@ import Posthog from '@/lib/posthog'
 import { redirect } from 'next/navigation'
 import { generateHomeMetadata } from './(home)/utils/get-home-metadata'
 
+// IMPORTANT: Adding `dynamicParams = false` currently breaks revalidation.
+//            See https://github.com/amannn/next-intl/issues/1467
+export const dynamicParams = false
+
+// IMPORTANT: Increase once we have a proper revalidation strategy.
+// export const revalidate = 30
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
 }

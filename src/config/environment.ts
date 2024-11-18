@@ -48,14 +48,16 @@ export const env = createEnv({
     SITE_PASSWORD: process.env.SITE_PASSWORD,
 
     NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
-
     NEXT_PUBLIC_DEVELOPMENT_MODE: process.env.NEXT_PUBLIC_DEVELOPMENT_MODE,
     NEXT_PUBLIC_PREVIEW_MODE: process.env.NEXT_PUBLIC_PREVIEW_MODE,
     NEXT_PUBLIC_STAGING_MODE: process.env.NEXT_PUBLIC_STAGING_MODE,
     NEXT_PUBLIC_PRODUCTION_MODE: process.env.NEXT_PUBLIC_PRODUCTION_MODE,
-
     NEXT_PUBLIC_SHOW_ALL_PAGES: process.env.NEXT_PUBLIC_SHOW_ALL_PAGES,
-
     NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
   },
+
+  /**
+   * Options (https://env.t3.gg/docs/core)
+   */
+  emptyStringAsUndefined: true,
 })

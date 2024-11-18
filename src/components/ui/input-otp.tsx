@@ -1,3 +1,8 @@
+/**
+ * IMPORTANT: This file is modified from the original shadcn/ui file.
+ *            DO NOT OVERWRITE IT WITH THE CLI.
+ */
+
 'use client'
 
 import { OTPInput, OTPInputContext } from 'input-otp'
@@ -35,6 +40,7 @@ const InputOTPSlot = React.forwardRef<
   React.ComponentPropsWithoutRef<'div'> & { index: number }
 >(({ index, className, ...props }, ref) => {
   const inputOTPContext = React.useContext(OTPInputContext)
+  if (!inputOTPContext.slots[index]) return null
   const { char, hasFakeCaret, isActive } = inputOTPContext.slots[index]
 
   return (

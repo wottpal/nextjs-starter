@@ -20,7 +20,7 @@ let nextConfig: NextConfig = {
   // },
   // Partial Prerendering
   experimental: {
-    // ppr: true,
+    ppr: true,
     // reactCompiler: true,
     // dynamicIO: true,
   },

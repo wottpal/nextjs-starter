@@ -6,7 +6,7 @@ import { getLocale, getTranslations } from 'next-intl/server'
 import type { Icon } from 'next/dist/lib/metadata/types/metadata-types'
 import type { OpenGraph } from 'next/dist/lib/metadata/types/opengraph-types'
 import type { ImageObject, Organization, WebSite, WithContext } from 'schema-dts'
-import manifest from '../../manifest'
+import manifest from '../../../manifest'
 
 export async function generateHomeMetadata() {
   const locale = (await getLocale()) as Locale
@@ -80,7 +80,7 @@ export async function generateHomeJsonLd() {
   const meta = await generateHomeMetadata()
 
   const ogBanner = meta.openGraph.images[0]
-  const image: ImageObject = {
+  const image: ImageObject | undefined = ogBanner && {
     '@type': 'ImageObject',
     url: ogBanner.url,
     height: ogBanner.height.toString(),

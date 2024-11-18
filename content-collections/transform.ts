@@ -31,7 +31,8 @@ function populateDocumentProperties(
   document: Schema<'frontmatter', ReturnType<typeof baseSchema>>,
 ) {
   // Locale details
-  const intlLocale = new Intl.Locale(document._meta.filePath.split('/')[0])
+  const localePathItem = document._meta.filePath.split('/')[0]
+  const intlLocale = new Intl.Locale(localePathItem as Locale)
   const locale = {
     baseName: intlLocale.baseName as Locale,
     language: intlLocale.language,

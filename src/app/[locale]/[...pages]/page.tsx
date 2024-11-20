@@ -2,10 +2,10 @@ import { Prose } from '@/components/layout/prose'
 import { Wrapper } from '@/components/layout/wrapper'
 import { MDX } from '@/components/mdx'
 import type { Locale } from '@/i18n/routing'
+import { findPage } from '@/lib/content-collections/find-page'
+import { getVisiblePages } from '@/lib/content-collections/get-pages'
 import { setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
-import { findPage } from './utils/find-page'
-import { getVisiblePages } from './utils/get-visible-pages'
 
 export async function generateStaticParams({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params

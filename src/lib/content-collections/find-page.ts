@@ -1,6 +1,6 @@
 import type { Locale } from '@/i18n/routing'
 import _ from 'lodash'
-import { getVisiblePages } from './get-visible-pages'
+import { getVisiblePages } from './get-pages'
 
 export const findPage = (locale: Locale, slugItems: string[]) => {
   const pages = getVisiblePages(locale).filter((page) => _.isEqual(page.slugItems, slugItems))

@@ -12,7 +12,7 @@ import './globals.css'
 import { type Locale, routing } from '@/i18n/routing'
 import Posthog from '@/lib/posthog'
 import { redirect } from 'next/navigation'
-import { generateHomeMetadata } from './(home)/utils/get-home-metadata'
+import { generateHomeMetadata } from '../../lib/content-collections/get-home-metadata'
 
 // IMPORTANT: Adding `dynamicParams = false` currently breaks revalidation.
 //            See https://github.com/amannn/next-intl/issues/1467

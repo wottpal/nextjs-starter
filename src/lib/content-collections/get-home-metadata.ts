@@ -1,16 +1,18 @@
 import { env } from '@/config/environment'
-import type { Locale } from '@/i18n/routing'
+import { type Locale, routing } from '@/i18n/routing'
 import dayjs from 'dayjs'
 import type { Metadata } from 'next'
 import { getLocale, getTranslations } from 'next-intl/server'
 import type { Icon } from 'next/dist/lib/metadata/types/metadata-types'
 import type { OpenGraph } from 'next/dist/lib/metadata/types/opengraph-types'
-import type { ImageObject, Organization, WebSite, WithContext } from 'schema-dts'
-import manifest from '../../../manifest'
+import type { ImageObject, Person, WebSite, WithContext } from 'schema-dts'
+import manifest from '../../app/manifest'
+import { getHomePage } from './get-pages'
 
 export async function generateHomeMetadata() {
   const locale = (await getLocale()) as Locale
   const t = await getTranslations('Metadata')
+  const homePage = getHomePage(locale)
 
   // OG images
   const ogBannerUrl = `${env.NEXT_PUBLIC_URL}/og/banner.jpg`
@@ -19,7 +21,7 @@ export async function generateHomeMetadata() {
     url: ogBannerUrl,
     width: 1200,
     height: 630,
-    alt: t('title'),
+    alt: homePage.metaTitle || homePage.title,
   } satisfies OpenGraph['images']
 
   // Icons
@@ -33,16 +35,13 @@ export async function generateHomeMetadata() {
   )
 
   return {
-    title: t('title'),
-    applicationName: t('shortTitle'),
-    publisher: t('shortTitle'),
-    description: t('description'),
-    keywords: t('keywords'),
+    title: homePage.metaTitle || homePage.title,
+    applicationName: t('name'),
+    publisher: t('author'),
+    description: homePage.metaDescription,
+    keywords: homePage.metaKeywords,
+    alternates: homePage.alternates,
     metadataBase: new URL(env.NEXT_PUBLIC_URL),
-    alternates: {
-      canonical: env.NEXT_PUBLIC_URL,
-      // languages:
-    },
     robots: {
       follow: env.NEXT_PUBLIC_PRODUCTION_MODE && !env.SITE_PASSWORD,
       index: env.NEXT_PUBLIC_PRODUCTION_MODE && !env.SITE_PASSWORD,
@@ -53,15 +52,16 @@ export async function generateHomeMetadata() {
     openGraph: {
       type: 'website',
       url: env.NEXT_PUBLIC_URL,
-      siteName: t('shortTitle'),
-      locale,
-      title: t('title'),
-      description: t('description'),
+      siteName: t('name'),
+      title: homePage.metaTitle || homePage.title,
+      description: homePage.metaDescription,
       images: [ogBanner],
+      locale,
+      alternateLocale: routing.locales.filter((l) => l !== locale),
     },
     twitter: {
       images: [ogBanner],
-      description: t('description'),
+      description: homePage.metaDescription,
       card: 'summary_large_image',
       // site: '@dennis_zoma',
       // creator: '@dennis_zoma',
@@ -88,15 +88,9 @@ export async function generateHomeJsonLd() {
     caption: ogBanner.alt,
   }
 
-  const publisher: Organization = {
-    '@type': 'Organization',
-    name: t('Metadata.shortTitle'),
-    logo: {
-      '@type': 'ImageObject',
-      url: meta.other['og:logo'],
-      width: '512',
-      height: '512',
-    },
+  const publisher: Person = {
+    '@type': 'Person',
+    name: t('Metadata.author'),
     contactPoint: {
       '@type': 'ContactPoint',
       email: t('Metadata.email'),
@@ -115,7 +109,7 @@ export async function generateHomeJsonLd() {
     },
     url: meta.openGraph.url,
     inLanguage: meta.openGraph.locale,
-    name: t('Metadata.shortTitle'),
+    name: t('Metadata.name'),
     headline: meta.title,
     description: meta.description,
     dateCreated: dayjs('2024-08-01').toISOString(),
@@ -126,7 +120,7 @@ export async function generateHomeJsonLd() {
     copyrightYear: dayjs().year(),
     copyrightHolder: {
       '@type': 'Organization',
-      name: t('Metadata.shortTitle'),
+      name: t('Metadata.author'),
     },
   } satisfies WithContext<WebSite>
 }

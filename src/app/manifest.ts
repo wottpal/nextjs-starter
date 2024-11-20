@@ -1,14 +1,15 @@
 import { defaultLocale } from '@/i18n/routing'
+import { getHomePage } from '@/lib/content-collections/get-pages'
 import type { MetadataRoute } from 'next'
 import { getTranslations } from 'next-intl/server'
 
 export default async function manifest(): Promise<MetadataRoute.Manifest> {
   const t = await getTranslations({ locale: defaultLocale, namespace: 'Metadata' })
+  const homePage = await getHomePage(defaultLocale)
 
   return {
-    name: t('title'),
-    short_name: t('shortTitle'),
-    description: t('description'),
+    name: t('name'),
+    description: homePage.metaDescription,
     start_url: '/',
     display: 'standalone',
     icons: [

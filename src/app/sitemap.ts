@@ -1,7 +1,7 @@
 import { type Locale, routing } from '@/i18n/routing'
 import dayjs from 'dayjs'
 import type { MetadataRoute } from 'next'
-import { getHomePage, getVisiblePages } from './[locale]/[...pages]/utils/get-visible-pages'
+import { getHomePage, getVisiblePages } from '../lib/content-collections/get-pages'
 
 export function generatePagesSitemap(locale: Locale) {
   const allVisiblePages = getVisiblePages(locale)

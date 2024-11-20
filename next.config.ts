@@ -14,11 +14,7 @@ let nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  // Dev Indicators
-  // devIndicators: {
-  //   appIsrStatus: false,
-  // },
-  // Partial Prerendering
+  // Experimental Features
   experimental: {
     ppr: true,
     // reactCompiler: true,

@@ -1,10 +1,8 @@
 {
   "Metadata": {
-    "title": "Next.js Starter",
-    "shortTitle": "Next.js Starter",
+    "name": "Next.js Starter",
+    "author": "Dennis Zoma",
     "website": "nextjs-starter-templates.com",
-    "email": "hi@nextjs-starter-templates.com",
-    "description": "Ein minimaler und einfacher Next.js Starter.",
-    "keywords": "Next.js, React, TypeScript, TailwindCSS, Shadcn, Vercel, Serverless, Sitemap, SEO, Blog, Portfolio, Starter, Template"
+    "email": "hi@nextjs-starter-templates.com"
   }
 }

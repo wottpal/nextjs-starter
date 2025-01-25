@@ -4,4 +4,4 @@ export type Alternates = {
 }
 
 // Modify if you want to add more collections
-export type PageCollection = 'blog'
+export type PageCollection = 'blog' | 'legal'

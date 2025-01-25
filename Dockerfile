@@ -11,12 +11,13 @@ WORKDIR /app
 # RUN apk add --no-cache libc6-compat 
 
 # Install dependencies based on the preferred package manager
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* bun.lockb* ./
+COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* bun.lockb* bun.lock* ./
 RUN \
   if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
   elif [ -f package-lock.json ]; then npm ci; \
   elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
   elif [ -f bun.lockb ]; then bun install; \
+  elif [ -f bun.lock ]; then bun install; \
   else echo "Lockfile not found." && exit 1; \
   fi
 
@@ -33,6 +34,7 @@ RUN \
   elif [ -f package-lock.json ]; then npm run build:standalone; \
   elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build:standalone; \
   elif [ -f bun.lockb ]; then bun run --bun build:standalone; \
+  elif [ -f bun.lock ]; then bun run --bun build:standalone; \
   else echo "Lockfile not found." && exit 1; \
   fi
 

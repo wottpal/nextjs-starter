@@ -12,8 +12,8 @@ export function generatePagesSitemap(locale: Locale) {
         url: page.url,
         alternates: page.alternates,
         lastModified: dayjs(page.dateModified).format('YYYY-MM-DD'),
-        changeFrequency: 'weekly',
-        priority: 1 - (page.slugItems.length - 1) / 20, // Subtract 0.05 per file-depth
+        changeFrequency: page.sitemap?.changeFrequency ?? 'weekly',
+        priority: page.sitemap?.priority ?? 1 - (page.slugItems.length - 1) / 20, // Subtract 0.05 per file-depth
       }
     })
     .sort((a, b) => b.priority - a.priority) as MetadataRoute.Sitemap

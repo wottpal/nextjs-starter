@@ -25,7 +25,9 @@ export const routing = defineRouting({
     mode: 'as-needed',
     prefixes: localePrefixes,
   },
-  // pathnames,
+  pathnames: {
+    '/': '/',
+  },
 })
 
 // export type Pathnames = keyof typeof routing.pathnames

@@ -19,7 +19,7 @@ import { generateHomeMetadata } from '../../lib/content-collections/get-home-met
 export const dynamicParams = false
 
 // IMPORTANT: Increase once we have a proper revalidation strategy.
-// export const revalidate = 30
+export const revalidate = 30
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))

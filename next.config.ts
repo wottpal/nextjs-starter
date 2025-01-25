@@ -4,10 +4,10 @@ import type { NextConfig } from 'next'
 import createNextIntlPlugin from 'next-intl/plugin'
 
 let nextConfig: NextConfig = {
+  reactStrictMode: true,
   // Build Mode (`standalone` for self-hosted builds)
   output: process.env.NEXT_OUTPUT as 'standalone' | undefined,
   // Biome
-  reactStrictMode: true,
   eslint: {
     ignoreDuringBuilds: true,
   },

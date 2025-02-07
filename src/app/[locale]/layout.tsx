@@ -1,18 +1,17 @@
 import { Toaster } from '@/components/ui/sonner'
-import { env } from '@/config/environment'
+import { env } from '@/config/env'
+import { type Locale, routing } from '@/i18n/routing'
+import Posthog from '@/lib/posthog'
 import { cn } from '@/utils/cn'
-import { GeistMono } from 'geist/font/mono'
-import { GeistSans } from 'geist/font/sans'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { NavigationGuardProvider } from 'next-navigation-guard'
 import { ThemeProvider } from 'next-themes'
-import { type ReactNode, Suspense } from 'react'
-import './globals.css'
-import { type Locale, routing } from '@/i18n/routing'
-import Posthog from '@/lib/posthog'
 import { redirect } from 'next/navigation'
+import { type ReactNode, Suspense } from 'react'
 import { generateHomeMetadata } from '../../lib/content-collections/get-home-metadata'
+import './(home)/styles/globals.css'
+import { fontStyles } from './(home)/styles/fonts'
 
 // IMPORTANT: Adding `dynamicParams = false` currently breaks revalidation.
 //            See https://github.com/amannn/next-intl/issues/1467
@@ -40,12 +39,7 @@ export default async function RootLayout({
   const messages = await getMessages({ locale })
 
   return (
-    <html
-      lang={locale}
-      dir="ltr"
-      className={cn(GeistSans.variable, GeistMono.variable)}
-      suppressHydrationWarning
-    >
+    <html lang={locale} dir="ltr" className={cn(fontStyles)} suppressHydrationWarning>
       <body className="relative flex h-full min-h-screen flex-col">
         <ThemeProvider
           attribute="class"

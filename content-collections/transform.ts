@@ -7,7 +7,7 @@ import rehypeSlug from 'rehype-slug'
 import remarkLintFinalNewline from 'remark-lint-final-newline'
 import remarkMdx from 'remark-mdx'
 import remarkPresetLintRecommended from 'remark-preset-lint-recommended'
-import { env } from '../src/config/environment'
+import { env } from '../src/config/env'
 import { type Locale, defaultLocale, localePrefixes } from '../src/i18n/routing'
 import type { baseSchema } from './schema'
 import type { Alternates, PageCollection } from './types'
@@ -81,6 +81,7 @@ async function getAlternates(
       return !doc.hidden && page.filePath === unlocalizedFilePath
     })
     .map(populateDocumentProperties)
+
   const defaultPage =
     alternatePages.find((altPage) => altPage.locale.baseName === defaultLocale) || page
 
@@ -103,7 +104,6 @@ async function getAlternates(
     { [page.locale.baseName]: page.slug } as Record<Locale, string>,
   )
   const defaultPathname = pathnames[defaultLocale]
-  // TODO Postprocess all pathnames required for routing
 
   return { alternates, pathnames, defaultPathname }
 }

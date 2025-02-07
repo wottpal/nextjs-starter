@@ -7,6 +7,8 @@ export const baseSchema = () => ({
 
   // Display Properties
   title: z.string(),
+  shortTitle: z.string().optional(),
+  author: z.string().optional(),
 
   // Article Properties
   datePublished: z.string().date().optional(),
@@ -27,5 +29,3 @@ export const baseSchema = () => ({
     })
     .optional(),
 })
-
-export const blogPostsSchema = baseSchema

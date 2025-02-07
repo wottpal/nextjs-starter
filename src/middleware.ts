@@ -1,16 +1,17 @@
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
-import { env } from './config/environment'
+import { env } from './config/env'
 import { routing } from './i18n/routing'
 import { generateDistinctId } from './lib/posthog/utils'
 
 // IMPORTANT: Must be imported after 'next/server'
 import createMiddleware from 'next-intl/middleware'
+import { redirectToAlternatePage } from './i18n/utils'
 
 export const config = {
   matcher: [
     // Match all paths except for API routes and static files.
-    '/((?!api|ingest|_next/static|_next/image|.+\\.(?:css|js|ico|txt|xml|json|jpg|jpeg|png|webp|gif|svg|woff|woff2|ttf|eot|webmanifest)).*)',
+    '/((?!api|ingest|_next|_vercel|.*\\..*).*)',
   ],
 }
 
@@ -45,6 +46,11 @@ export async function middleware(req: NextRequest) {
     }
   }
 
-  const res = createMiddleware({ ...routing, alternateLinks: false })(req)
+  // Middleware: next-intl
+  let res = createMiddleware(routing)(req)
+
+  // Manually redirect unprefixed paths to alternate pages
+  res = redirectToAlternatePage(req, res)
+
   return wrapResponse(res)
 }

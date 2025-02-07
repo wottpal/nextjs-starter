@@ -4,6 +4,7 @@
 .prettierignore
 .vscode
 README.md
+LICENSE
 biome.json
 components.json
 prettier.config.js

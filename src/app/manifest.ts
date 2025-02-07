@@ -5,7 +5,7 @@ import { getTranslations } from 'next-intl/server'
 
 export default async function manifest(): Promise<MetadataRoute.Manifest> {
   const t = await getTranslations({ locale: defaultLocale, namespace: 'Metadata' })
-  const homePage = await getHomePage(defaultLocale)
+  const homePage = getHomePage(defaultLocale)
 
   return {
     name: t('name'),

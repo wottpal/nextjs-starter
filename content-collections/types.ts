@@ -3,5 +3,5 @@ export type Alternates = {
   languages: Record<string, string> & Record<'x-default', string>
 }
 
-// Modify if you want to add more collections
-export type PageCollection = 'blog' | 'legal'
+// Modify to add more collections
+export type PageCollection = 'legal' | 'blog'

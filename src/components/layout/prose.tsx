@@ -4,7 +4,7 @@ import type { FC } from 'react'
 
 export const proseVariants = cva(
   cn(
-    'prose prose-neutral dark:prose-invert max-w-none',
+    'prose prose-neutral dark:prose-invert max-w-none break-words',
     'before:prose-p:content-none after:prose-p:content-none', // Disable quotation marks
   ),
   {

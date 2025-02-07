@@ -8,29 +8,16 @@ export const localePrefixes = {
   de: '/de',
 }
 
-// const pathnames = allPages
-//   .filter((page) => page.locale === DEFAULT_LOCALE && isPageVisible(page))
-//   .reduce(
-//     (acc, page) => {
-//       acc[page.slug] = page.pathnames
-//       return acc
-//     },
-//     { '/': '/' } as Record<string, Record<string, string> | string>,
-//   )
+export type Locale = keyof typeof localePrefixes
 
 export const routing = defineRouting({
-  locales: ['en', 'de'],
+  locales: Object.keys(localePrefixes) as Locale[],
   defaultLocale,
   localePrefix: {
     mode: 'as-needed',
     prefixes: localePrefixes,
   },
-  pathnames: {
-    '/': '/',
-  },
+  alternateLinks: false,
 })
-
-// export type Pathnames = keyof typeof routing.pathnames
-export type Locale = (typeof routing.locales)[number]
 
 export const { Link, getPathname, redirect, usePathname, useRouter } = createNavigation(routing)

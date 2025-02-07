@@ -1,5 +1,5 @@
 'use client'
-import { env } from '@/config/environment'
+import { env } from '@/config/env'
 import { posthog } from '@/config/posthog-web'
 import { getCookie } from 'cookies-next'
 import { isbot } from 'isbot'

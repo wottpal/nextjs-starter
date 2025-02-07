@@ -1,4 +1,4 @@
-import { env } from '@/config/environment'
+import { env } from '@/config/env'
 import type { Locale } from '@/i18n/routing'
 import { type Page, allPages } from 'content-collections'
 import dayjs from 'dayjs'

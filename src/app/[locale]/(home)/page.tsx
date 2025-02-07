@@ -1,32 +1,31 @@
-import { proseVariants } from '@/components/layout/prose'
+import { JsonLd } from '@/components/layout/jsonld'
+import { Logo } from '@/components/layout/logo'
+import { StandardLayout } from '@/components/layout/standard-layout'
 import type { Locale } from '@/i18n/routing'
-import { getHomePage, getVisiblePages } from '@/lib/content-collections/get-pages'
+import { generateHomeJsonLd } from '@/lib/content-collections/get-home-metadata'
+import { getHomePage } from '@/lib/content-collections/get-pages'
 import { setRequestLocale } from 'next-intl/server'
-import Link from 'next/link'
+import type { WebSite } from 'schema-dts'
 
 export default async function HomePage({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params
   setRequestLocale(locale)
 
   const homePage = getHomePage(locale)
-  const allBlogPosts = getVisiblePages(locale, ['blog'])
+  const jsonLd = await generateHomeJsonLd()
 
   return (
-    <main className="flex grow flex-col items-center justify-center gap-10">
-      {/* Header */}
-      <header className="flex flex-col items-center gap-2 text-center">
-        <h1 className="font-bold text-3xl tracking-tight">{homePage.title}</h1>
-        <p className="text-muted-foreground">{homePage.metaDescription}</p>
-      </header>
-
-      {/* Blog Posts */}
-      <section className={proseVariants()}>
-        {allBlogPosts.map((page) => (
-          <div key={page.slug}>
-            <Link href={page.slug}>{page.title}</Link>
+    <>
+      <StandardLayout page={homePage}>
+        <div className="flex grow flex-col items-center justify-center gap-4 opacity-25">
+          <Logo noLink />
+          <div className="max-w-prose text-muted-foreground text-sm">
+            {homePage.metaDescription}
           </div>
-        ))}
-      </section>
-    </main>
+        </div>
+      </StandardLayout>
+
+      <JsonLd<WebSite> data={jsonLd} />
+    </>
   )
 }

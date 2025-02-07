@@ -1,5 +1,5 @@
 import { PostHog } from 'posthog-node'
-import { env } from './environment'
+import { env } from './env'
 
 export const posthog =
   env.NEXT_PUBLIC_PRODUCTION_MODE && env.NEXT_PUBLIC_POSTHOG_KEY

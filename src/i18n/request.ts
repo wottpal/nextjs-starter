@@ -1,3 +1,4 @@
+import deepmerge from 'deepmerge'
 import { getRequestConfig } from 'next-intl/server'
 import { type Locale, routing } from './routing'
 
@@ -12,11 +13,16 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
   return {
     locale,
-    messages: (
-      await (locale === 'en'
-        ? // When using Turbopack, this will enable HMR for `en`
-          import('../../messages/en.json')
-        : import(`../../messages/${locale}.json`))
-    ).default,
+    // When using Turbopack, this will enable HMR for `en`
+    messages:
+      locale === 'en'
+        ? (await import('../../messages/en.json')).default
+        : await getMessages(locale as Locale),
   }
 })
+
+async function getMessages(locale: Locale) {
+  const defaultMessages = (await import('../../messages/en.json')).default
+  const userMessages = (await import(`../../messages/${locale}.json`)).default
+  return deepmerge(defaultMessages, userMessages)
+}

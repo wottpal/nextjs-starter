@@ -1,7 +1,7 @@
 import { type VariantProps, cva } from 'class-variance-authority'
 import type { FC } from 'react'
 
-export const wrapperVariants = cva('mx-auto w-full p-5 sm:px-8', {
+export const wrapperVariants = cva('mx-auto w-full px-6 py-8 sm:px-10 sm:py-12', {
   variants: {
     size: {
       sm: 'max-w-screen-sm',
@@ -11,7 +11,7 @@ export const wrapperVariants = cva('mx-auto w-full p-5 sm:px-8', {
     },
   },
   defaultVariants: {
-    size: 'md',
+    size: 'lg',
   },
 })
 

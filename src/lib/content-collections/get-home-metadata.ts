@@ -1,11 +1,11 @@
-import { env } from '@/config/environment'
+import { env } from '@/config/env'
 import { type Locale, routing } from '@/i18n/routing'
 import dayjs from 'dayjs'
 import type { Metadata } from 'next'
 import { getLocale, getTranslations } from 'next-intl/server'
 import type { Icon } from 'next/dist/lib/metadata/types/metadata-types'
 import type { OpenGraph } from 'next/dist/lib/metadata/types/opengraph-types'
-import type { ImageObject, Person, WebSite, WithContext } from 'schema-dts'
+import type { ImageObject, Organization, Person, WebSite, WithContext } from 'schema-dts'
 import manifest from '../../app/manifest'
 import { getHomePage } from './get-pages'
 
@@ -88,15 +88,30 @@ export async function generateHomeJsonLd() {
     caption: ogBanner.alt,
   }
 
-  const publisher: Person = {
+  // TODO
+  const author: Person | Organization = {
     '@type': 'Person',
+    // '@type': 'Organization',
+    name: t('Metadata.author'),
+  }
+  // TODO
+  const publisher: Person | Organization = {
+    '@type': 'Person',
+    // '@type': 'Organization',
     name: t('Metadata.author'),
     contactPoint: {
       '@type': 'ContactPoint',
       email: t('Metadata.email'),
     },
-    // TODO
-    // sameAs: [t('Links.x'), t('Links.github'), t('Links.linkedin')],
+    //   logo: {
+    //     '@type': 'ImageObject',
+    //     url: meta.other['og:logo'],
+    //     width: '512',
+    //     height: '512',
+    //   },
+    //   sameAs: [
+    //     t('Links.twitter'),
+    //   ],
   }
 
   return {
@@ -107,6 +122,8 @@ export async function generateHomeJsonLd() {
       '@type': 'WebPage',
       '@id': meta.alternates.canonical,
     },
+    author,
+    publisher,
     url: meta.openGraph.url,
     inLanguage: meta.openGraph.locale,
     name: t('Metadata.name'),
@@ -116,7 +133,6 @@ export async function generateHomeJsonLd() {
     dateModified: dayjs().toISOString(),
     image,
     keywords: meta.keywords,
-    publisher,
     copyrightYear: dayjs().year(),
     copyrightHolder: {
       '@type': 'Organization',

@@ -17,11 +17,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
   return (
     <>
       <StandardLayout page={homePage}>
-        <div className="flex grow flex-col items-center justify-center gap-4 opacity-25">
+        <div className="flex grow flex-col items-center justify-center gap-4 opacity-30">
           <Logo noLink />
-          <div className="max-w-prose text-muted-foreground text-sm">
-            {homePage.metaDescription}
-          </div>
+          <div className="max-w-prose text-muted-foreground ">{homePage.metaDescription}</div>
         </div>
       </StandardLayout>
 

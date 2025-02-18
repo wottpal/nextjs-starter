@@ -18,10 +18,7 @@ import type { Article } from 'schema-dts'
 export async function generateStaticParams({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params
   const allVisiblePages = getVisiblePages(locale)
-  return allVisiblePages.map((page) => ({
-    locale,
-    pages: page.slug.split('/').slice(1),
-  }))
+  return allVisiblePages.map((page) => ({ locale, pages: page.slugItems }))
 }
 
 export async function generateMetadata({

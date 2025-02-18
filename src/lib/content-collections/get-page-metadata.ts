@@ -19,7 +19,7 @@ export async function generatePageMetadata(page: Page) {
   const title = page.metaTitle || page.title
   const description = page.metaDescription || homePageMeta.description
   // TODO
-  // const images = [await generateOgImageMetadata(page)]
+  // const images = [generateOgImageMetadata(page)]
   const images = homePageMeta.openGraph.images
 
   return {
@@ -101,8 +101,8 @@ export async function generatePageJsonLd(page: Page) {
   } satisfies WithContext<Article>
 }
 
-export async function generateOgImageMetadata(page: Page) {
-  const homePage = await getHomePage(page.locale.baseName)
+export function generateOgImageMetadata(page: Page) {
+  const homePage = getHomePage(page.locale.baseName)
 
   // Build the image URL (define `title` and `image` query params)
   const imageUrl = new URL(`${env.NEXT_PUBLIC_URL}/api/og`)

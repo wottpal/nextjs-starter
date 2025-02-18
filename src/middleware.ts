@@ -2,11 +2,11 @@ import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 import { env } from './config/env'
 import { routing } from './i18n/routing'
+import { redirectToAlternatePage } from './i18n/utils'
 import { generateDistinctId } from './lib/posthog/utils'
 
 // IMPORTANT: Must be imported after 'next/server'
 import createMiddleware from 'next-intl/middleware'
-import { redirectToAlternatePage } from './i18n/utils'
 
 export const config = {
   matcher: [

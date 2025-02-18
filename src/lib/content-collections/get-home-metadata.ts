@@ -129,7 +129,7 @@ export async function generateHomeJsonLd() {
     name: t('Metadata.name'),
     headline: meta.title,
     description: meta.description,
-    dateCreated: dayjs('2024-08-01').toISOString(),
+    dateCreated: dayjs('2025-03-01').toISOString(),
     dateModified: dayjs().toISOString(),
     image,
     keywords: meta.keywords,

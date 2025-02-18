@@ -20,7 +20,6 @@ export async function generateStaticParams({ params }: { params: Promise<{ local
   const allVisiblePages = getVisiblePages(locale)
   return allVisiblePages.map((page) => ({
     locale,
-    // pages: page.defaultPathname.split('/').slice(1),
     pages: page.slug.split('/').slice(1),
   }))
 }

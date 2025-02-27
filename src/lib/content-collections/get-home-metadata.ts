@@ -1,5 +1,5 @@
 import { env } from '@/config/env'
-import { type Locale, routing } from '@/i18n/routing'
+import { type Locale, locales } from '@/i18n/routing'
 import dayjs from 'dayjs'
 import type { Metadata } from 'next'
 import { getLocale, getTranslations } from 'next-intl/server'
@@ -57,7 +57,7 @@ export async function generateHomeMetadata() {
       description: homePage.metaDescription,
       images: [ogBanner],
       locale,
-      alternateLocale: routing.locales.filter((l) => l !== locale),
+      alternateLocale: locales.filter((l) => l !== locale),
     },
     twitter: {
       images: [ogBanner],
@@ -122,8 +122,6 @@ export async function generateHomeJsonLd() {
       '@type': 'WebPage',
       '@id': meta.alternates.canonical,
     },
-    author,
-    publisher,
     url: meta.openGraph.url,
     inLanguage: meta.openGraph.locale,
     name: t('Metadata.name'),
@@ -133,10 +131,9 @@ export async function generateHomeJsonLd() {
     dateModified: dayjs().toISOString(),
     image,
     keywords: meta.keywords,
+    author,
+    publisher,
     copyrightYear: dayjs().year(),
-    copyrightHolder: {
-      '@type': 'Organization',
-      name: t('Metadata.author'),
-    },
+    copyrightHolder: author,
   } satisfies WithContext<WebSite>
 }

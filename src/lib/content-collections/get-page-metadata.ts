@@ -1,5 +1,5 @@
 import { env } from '@/config/env'
-import { type Locale, routing } from '@/i18n/routing'
+import { type Locale, locales } from '@/i18n/routing'
 import type { Page } from 'content-collections'
 import dayjs from 'dayjs'
 import type { Metadata } from 'next'
@@ -41,7 +41,7 @@ export async function generatePageMetadata(page: Page) {
       publishedTime: dayjs(page.datePublished).toISOString(),
       modifiedTime: dayjs(page.dateModified).toISOString(),
       emails: t('email'),
-      alternateLocale: routing.locales.filter((l) => l !== locale),
+      alternateLocale: locales.filter((l) => l !== locale),
     },
     twitter: {
       title,

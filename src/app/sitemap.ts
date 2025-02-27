@@ -1,9 +1,24 @@
-import { type Locale, routing } from '@/i18n/routing'
+import { type Locale, locales } from '@/i18n/routing'
 import dayjs from 'dayjs'
 import type { MetadataRoute } from 'next'
 import { getHomePage, getVisiblePages } from '../lib/content-collections/get-pages'
 
-export function generatePagesSitemap(locale: Locale) {
+function generateHomePageSitemap(locale: Locale) {
+  const today = dayjs().format('YYYY-MM-DD')
+  const homePage = getHomePage(locale)
+
+  return [
+    {
+      url: homePage.url,
+      alternates: homePage.alternates,
+      lastModified: today,
+      changeFrequency: 'daily',
+      priority: 1,
+    },
+  ] as MetadataRoute.Sitemap
+}
+
+function generatePagesSitemap(locale: Locale) {
   const allVisiblePages = getVisiblePages(locale)
 
   return allVisiblePages
@@ -19,25 +34,10 @@ export function generatePagesSitemap(locale: Locale) {
     .sort((a, b) => b.priority - a.priority) as MetadataRoute.Sitemap
 }
 
-export function generateHomePageSitemap(locale: Locale) {
-  const today = dayjs().format('YYYY-MM-DD')
-  const homePage = getHomePage(locale)
-
-  return [
-    {
-      url: homePage.url,
-      alternates: homePage.alternates,
-      lastModified: today,
-      changeFrequency: 'daily',
-      priority: 1,
-    },
-  ] as MetadataRoute.Sitemap
-}
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const sitemaps: MetadataRoute.Sitemap = []
 
-  for (const locale of routing.locales) {
+  for (const locale of locales) {
     sitemaps.push(...generateHomePageSitemap(locale))
     sitemaps.push(...generatePagesSitemap(locale))
   }

@@ -1,6 +1,6 @@
 import { Toaster } from '@/components/ui/sonner'
 import { env } from '@/config/env'
-import { type Locale, routing } from '@/i18n/routing'
+import { type Locale, locales } from '@/i18n/routing'
 import Posthog from '@/lib/posthog'
 import { cn } from '@/utils/cn'
 import { NextIntlClientProvider } from 'next-intl'
@@ -21,7 +21,7 @@ export const dynamicParams = false
 export const revalidate = 30
 
 export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }))
+  return locales.map((locale) => ({ locale }))
 }
 
 export async function generateMetadata() {
@@ -33,7 +33,7 @@ export default async function RootLayout({
   params,
 }: { children: ReactNode; params: Promise<{ locale: Locale }> }) {
   const { locale } = await params
-  if (!routing.locales.includes(locale)) redirect('/')
+  if (!locales.includes(locale)) redirect('/')
   setRequestLocale(locale)
 
   const messages = await getMessages({ locale })

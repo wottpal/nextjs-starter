@@ -1,14 +1,14 @@
 import deepmerge from 'deepmerge'
 import { getRequestConfig } from 'next-intl/server'
-import { type Locale, routing } from './routing'
+import { type Locale, defaultLocale, locales } from './routing'
 
 export default getRequestConfig(async ({ requestLocale }) => {
   // This typically corresponds to the `[locale]` segment
   let locale = await requestLocale
 
   // Ensure that the incoming locale is valid
-  if (!locale || !routing.locales.includes(locale as Locale)) {
-    locale = routing.defaultLocale
+  if (!locale || !locales.includes(locale as Locale)) {
+    locale = defaultLocale
   }
 
   return {

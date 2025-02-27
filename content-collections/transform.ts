@@ -41,7 +41,8 @@ function populateDocumentProperties(
   }
 
   // Page properties
-  const localizedSlug = `${locale.prefix}${document.slug}`
+  const slug = document.slug && document.slug !== '/' ? document.slug : ''
+  const localizedSlug = `${locale.prefix}${slug}`
   const url = `${env.NEXT_PUBLIC_URL}${localizedSlug}`
   const slugItems = document.slug.split('/').slice(1)
   const unlocalizedFilePath = document._meta.filePath.split('/').slice(1).join('/')
@@ -89,13 +90,14 @@ async function getAlternates(
     canonical: page.url,
     languages: alternatePages.reduce(
       (acc, altPage) => {
-        acc[altPage.locale.language] = altPage.url
+        acc[altPage.locale.baseName] = altPage.url
         return acc
       },
       { 'x-default': `${env.NEXT_PUBLIC_URL}${defaultPage.slug}` } as Alternates['languages'],
     ),
   }
 
+  // TODO needed … ?
   const pathnames = alternatePages.reduce(
     (acc, altPage) => {
       acc[altPage.locale.baseName] = altPage.slug

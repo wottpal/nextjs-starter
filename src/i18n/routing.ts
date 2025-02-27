@@ -7,11 +7,12 @@ export const localePrefixes = {
   en: '/en',
   de: '/de',
 }
-
 export type Locale = keyof typeof localePrefixes
 
+export const locales = Object.keys(localePrefixes) as Locale[]
+
 export const routing = defineRouting({
-  locales: Object.keys(localePrefixes) as Locale[],
+  locales,
   defaultLocale,
   localePrefix: {
     mode: 'as-needed',

@@ -8,7 +8,7 @@ import remarkLintFinalNewline from 'remark-lint-final-newline'
 import remarkMdx from 'remark-mdx'
 import remarkPresetLintRecommended from 'remark-preset-lint-recommended'
 import { env } from '../src/config/env'
-import { type Locale, defaultLocale, localePrefixes } from '../src/i18n/routing'
+import { type Locale, defaultLocale, localePrefixMode, localePrefixes } from '../src/i18n/routing'
 import type { baseSchema } from './schema'
 import type { Alternates, PageCollection } from './types'
 
@@ -41,9 +41,12 @@ function populateDocumentProperties(
   }
 
   // Page properties
-  const slug = document.slug && document.slug !== '/' ? document.slug : ''
-  const localizedSlug = `${locale.prefix}${slug}`
-  const url = `${env.NEXT_PUBLIC_URL}${localizedSlug}`
+  const slug = document.slug
+  const localizedSlug = `${locale.prefix}${slug && slug !== '/' ? slug : ''}`
+  const url =
+    localePrefixMode === 'as-needed'
+      ? `${env.NEXT_PUBLIC_URL}${locale.baseName === defaultLocale ? slug : localizedSlug}`
+      : `${env.NEXT_PUBLIC_URL}${localizedSlug}`
   const slugItems = document.slug.split('/').slice(1)
   const unlocalizedFilePath = document._meta.filePath.split('/').slice(1).join('/')
   const unlocalizedPathItems = document._meta.path.split('/').slice(1)

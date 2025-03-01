@@ -60,3 +60,10 @@ bun run update
 # Install shadcn/ui component
 bunx shadcn@latest add <component>
 ```
+
+## Deployment
+
+```bash
+# Run the Docker container
+docker build -t nextjs-starter . && docker run -p 3000:3000 nextjs-starter
+```

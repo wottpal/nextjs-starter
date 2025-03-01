@@ -1,4 +1,7 @@
-FROM imbios/bun-node:latest-iron-alpine AS base
+# syntax=docker/dockerfile:1
+# check=skip=SecretsUsedInArgOrEnv
+
+FROM imbios/bun-node:latest-22-alpine AS base
 # FROM node:18-alpine AS base
 # FROM oven/bun:alpine AS base
 

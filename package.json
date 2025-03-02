@@ -26,7 +26,7 @@
     "typecheck": "tsc --pretty --noEmit",
     "typesync": "typesync --dry",
     "postinstall": "biome check package.json --write > /dev/null 2>&1 && next telemetry disable > /dev/null 2>&1",
-    "update": "bunx taze --interactive --write --install --includeLocked --exclude \"tailwindcss,tailwind-merge,@content-collections/next\""
+    "update": "bunx taze --interactive --write --install --includeLocked --exclude \"tailwindcss,tailwind-merge\""
   },
   "nano-staged": {
     "*.{js,ts,cjs,mjs,jsx,tsx,json,jsonc,css}": "biome check --write --no-errors-on-unmatched",
@@ -101,7 +101,7 @@
     "@content-collections/cli": "^0.1.6",
     "@content-collections/core": "^0.8.0",
     "@content-collections/mdx": "^0.2.0",
-    "@content-collections/next": "0.2.4",
+    "@content-collections/next": "^0.2.5",
     "@next/bundle-analyzer": "canary",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/container-queries": "^0.1.1",
@@ -117,7 +117,7 @@
     "prettier": "^3.5.2",
     "rehype-slug": "^6.0.0",
     "remark-preset-lint-recommended": "^7.0.1",
-    "schema-dts": "^1.1.2",
+    "schema-dts": "^1.1.5",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.8.2",
     "typesync": "^0.14.1"

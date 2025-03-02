@@ -17,9 +17,10 @@
 - 🐶 Posthog Analytics
 - 🔒 Simple (free) Password Protection
 - 📃 Dynamic Markdown/MDX Pages with [Content Collections](https://content-collections.vercel.app/)
-- 🌎 Multilanguage & Internationalization-ready
+- 🌎 Multilanguage & Internationalization with [next-intl](https://next-intl-docs.vercel.app/)
 - 🔑 Environment Management with [T3 Env](https://env.t3.gg/)
 - 🔍 SEO-optimized with Metadata, Dynamic Sitemap, JSON-LD, and more.
+- 🧪 Supports latest Next.js experimental features (PPR, etc.)
 <!-- - 📸 Dynamic Open Graph Images TODO -->
 
 ## Getting Started
@@ -61,7 +62,7 @@ bun run update
 bunx shadcn@latest add <component>
 ```
 
-## Deployment
+## Self-hosting
 
 ```bash
 # Run the Docker container

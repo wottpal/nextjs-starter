@@ -99,9 +99,9 @@
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@content-collections/cli": "^0.1.6",
-    "@content-collections/core": "^0.8.0",
-    "@content-collections/mdx": "^0.2.0",
-    "@content-collections/next": "^0.2.5",
+    "@content-collections/core": "https://pkg.pr.new/sdorra/content-collections/@content-collections/core@512",
+    "@content-collections/next": "https://pkg.pr.new/sdorra/content-collections/@content-collections/next@512",
+    "@content-collections/mdx": "https://pkg.pr.new/sdorra/content-collections/@content-collections/mdx@512",
     "@next/bundle-analyzer": "canary",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/container-queries": "^0.1.1",

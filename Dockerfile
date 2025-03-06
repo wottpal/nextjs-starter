@@ -14,15 +14,8 @@ WORKDIR /app
 # RUN apk add --no-cache libc6-compat 
 
 # Install dependencies based on the preferred package manager
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* bun.lockb* bun.lock* ./
-RUN \
-  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
-  elif [ -f bun.lockb ]; then bun install; \
-  elif [ -f bun.lock ]; then bun install; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
+COPY package.json bun.lock* bunfig.toml* ./
+RUN bun install
 
 # 2. Rebuild the source code only when needed
 FROM base AS builder
@@ -32,15 +25,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN \
-  if [ -f yarn.lock ]; then yarn run build:standalone; \
-  elif [ -f package-lock.json ]; then npm run build:standalone; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build:standalone; \
-  elif [ -f bun.lockb ]; then bun run --bun build:standalone; \
-  elif [ -f bun.lock ]; then bun run --bun build:standalone; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
-
+RUN bun run build:standalone
 
 # 3. Production image, copy all the files and run next
 FROM base AS runner
@@ -72,5 +57,5 @@ ENV PORT=3000
 EXPOSE 3000
 
 # Run server.js which is created by next build from the standalone output
-CMD ["bun", "--bun", "server.js"]
+CMD ["bun", "server.js"]
 # CMD ["node", "server.js"]

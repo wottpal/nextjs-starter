@@ -14,11 +14,11 @@ let nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  serverExternalPackages: ['@content-collections/core', 'esbuild'],
   // Experimental Features
   experimental: {
     ppr: true,
     // reactCompiler: true,
-    // dynamicIO: true,
   },
   // Posthog Rewrites
   skipTrailingSlashRedirect: true,

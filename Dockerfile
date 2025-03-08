@@ -14,6 +14,8 @@ WORKDIR /app
 # RUN apk add --no-cache libc6-compat 
 
 # Install dependencies based on the preferred package manager
+# Copy content-collections-next directory
+COPY content-collections-next ./content-collections-next
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* bun.lockb* bun.lock* ./
 RUN \
   if [ -f yarn.lock ]; then yarn --frozen-lockfile; \

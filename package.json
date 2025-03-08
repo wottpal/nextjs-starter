@@ -25,8 +25,9 @@
     "lint:fix": "biome check . --write --files-ignore-unknown=true && prettier . --write",
     "typecheck": "tsc --pretty --noEmit",
     "typesync": "typesync --dry",
-    "postinstall": "biome check package.json --write > /dev/null 2>&1 && next telemetry disable > /dev/null 2>&1",
-    "update": "bunx taze --interactive --write --install --includeLocked --exclude \"tailwindcss,tailwind-merge\""
+    "update": "bunx taze --interactive --write --install --includeLocked --exclude \"tailwindcss,tailwind-merge\"",
+    "patch-content-collections": "rm -rf node_modules/@content-collections/next && cp -R content-collections-next node_modules/@content-collections/next",
+    "postinstall": "biome check package.json --write > /dev/null 2>&1 && next telemetry disable > /dev/null 2>&1"
   },
   "nano-staged": {
     "*.{js,ts,cjs,mjs,jsx,tsx,json,jsonc,css}": "biome check --write --no-errors-on-unmatched",
@@ -100,8 +101,8 @@
     "@biomejs/biome": "^1.9.4",
     "@content-collections/cli": "^0.1.6",
     "@content-collections/core": "https://pkg.pr.new/sdorra/content-collections/@content-collections/core@512",
-    "@content-collections/next": "0.2.5",
     "@content-collections/mdx": "https://pkg.pr.new/sdorra/content-collections/@content-collections/mdx@512",
+    "@content-collections/next": "0.2.5",
     "@next/bundle-analyzer": "canary",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/container-queries": "^0.1.1",

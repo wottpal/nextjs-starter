@@ -46,6 +46,13 @@ export async function middleware(req: NextRequest) {
     }
   }
 
+  // Trailing Slash Redirect
+  const pathname = url.pathname
+  if (pathname !== '/' && pathname.endsWith('/')) {
+    const path = pathname.slice(0, -1)
+    return wrapResponse(NextResponse.redirect(new URL(path, req.url), { status: 308 }))
+  }
+
   // Middleware: next-intl
   let res = createMiddleware(routing)(req)
 
